@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Gaez.BakeryHouse.Domain\Gaez.BakeryHouse.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
