@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
+             x:Class="Gaez.BakeryHouse.Views.HomePage">
+    
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="fimgStyle">
+                <Setter Property="BorderColor" Value="LightGray"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="180"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RefreshView RefreshColor="{StaticResource primaryColor}"
+                 IsRefreshing="{Binding RefreshIsVisible}"
+                 Command="{Binding OnRefreshCommand}">
+        <ScrollView HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Never">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                  IsVisible="{Binding ViewIsVisible}"
+                  RowSpacing="20"
+                  Margin="10">
+                <StackLayout Grid.Row="0"
+                             Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Style="{StaticResource subPriLabel}"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="End"
+                               Text="Cursos"/>
+                        <Label Style="{StaticResource subSecLabel}"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="End"
+                               Text="Ver más"/>
+                    </StackLayout>
+                    <Frame Style="{StaticResource fimgStyle}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Style="{StaticResource subPriLabel}"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="End"
+                               Text="Ofertas especiales"/>
+                        <Label Style="{StaticResource subSecLabel}"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="End"
+                               Text="Ver más"/>
+                    </StackLayout>
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="10">
+                        <Frame Grid.Column="0"
+                               Style="{StaticResource fimgStyle}"/>
+                        <Frame Grid.Column="1" 
+                               Style="{StaticResource fimgStyle}"/>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Style="{StaticResource subPriLabel}"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="End"
+                               Text="Recetas"/>
+                        <Label Style="{StaticResource subSecLabel}"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="End"
+                               Text="Ver más"/>
+                    </StackLayout>
+                    <Frame Style="{StaticResource fimgStyle}"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

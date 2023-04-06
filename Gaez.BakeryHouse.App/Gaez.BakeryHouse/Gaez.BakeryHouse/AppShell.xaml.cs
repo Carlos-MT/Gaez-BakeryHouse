@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace Gaez.BakeryHouse
 {
-    public partial class MainPage : ContentPage
+    public partial class AppShell : Shell
     {
-        public MainPage()
+        public AppShell()
         {
             InitializeComponent();
         }
