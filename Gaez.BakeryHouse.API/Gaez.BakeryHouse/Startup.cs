@@ -1,4 +1,5 @@
 ﻿using Gaez.BakeryHouse.Data;
+using Gaez.BakeryHouse.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gaez.BakeryHouse
@@ -21,8 +22,11 @@ namespace Gaez.BakeryHouse
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.AddDbContext<ApplicationDbContext>(options => 
+            services.AddDbContext<GaezDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<CategoryService, CategoryService>();
+            services.AddTransient<ProductService, ProductService>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
