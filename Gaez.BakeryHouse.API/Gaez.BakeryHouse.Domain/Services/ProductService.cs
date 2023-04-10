@@ -31,6 +31,7 @@ namespace Gaez.BakeryHouse.Domain.Services
             try
             {
                 var query = from t1 in productsRepo.GetAll()
+                            orderby t1.ProductName ascending
                             select new ProductModel()
                             {
                                 ProductCode = t1.ProductCode,

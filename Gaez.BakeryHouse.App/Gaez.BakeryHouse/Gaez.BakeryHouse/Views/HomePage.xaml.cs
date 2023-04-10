@@ -13,10 +13,17 @@ namespace Gaez.BakeryHouse.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        private HomeViewModel viewModel;
         public HomePage()
         {
             InitializeComponent();
-            BindingContext = new HomeViewModel();
+            BindingContext = viewModel = new HomeViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.LoadData();
         }
     }
 }

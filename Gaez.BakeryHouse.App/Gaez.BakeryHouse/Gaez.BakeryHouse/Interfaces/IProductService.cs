@@ -9,13 +9,13 @@ namespace Gaez.BakeryHouse.Interfaces
 {
     public interface IProductService
     {
-        [Get("/GetAllProducts")]
+        [Get("/Product/GetAllProducts")]
         Task<IEnumerable<ProductModel>> GetAllProducts();
 
-        [Get("/GetProductsFromLowerToHigherPrice")]
+        [Get("/Product/GetProductsFromLowerToHigherPrice")]
         Task<IEnumerable<ProductModel>> GetProductsFromLowerToHigherPrice(int categoryId);
 
-        [Get("/GetProductsFromHigherToLowerPrice")]
+        [Get("/Product/GetProductsFromHigherToLowerPrice")]
         Task<IEnumerable<ProductModel>> GetProductsFromHigherToLowerPrice(int categoryId);
     }
 }

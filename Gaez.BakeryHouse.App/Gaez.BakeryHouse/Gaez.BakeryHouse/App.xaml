@@ -19,6 +19,12 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="Small"/>
             </Style>
+            <Style TargetType="Label" x:Key="iconLabel">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontFamily" Value="typicons"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
