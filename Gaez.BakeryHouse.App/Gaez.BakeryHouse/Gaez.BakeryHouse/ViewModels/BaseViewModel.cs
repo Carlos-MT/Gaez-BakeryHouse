@@ -17,6 +17,8 @@ namespace Gaez.BakeryHouse.ViewModels
         private bool isScrollEnable;
         private bool isSearchViewVisible;
         private bool isPressed;
+        private bool isRefreshEnable;
+        private string inputText;
         #endregion
         #region PROPERTIES
         public bool IsContentViewVisible
@@ -44,6 +46,16 @@ namespace Gaez.BakeryHouse.ViewModels
             get { return isPressed; }
             set { isPressed = value; OnPropertyChanged(); }
         }
+        public string InputText
+        {
+            get { return inputText; }
+            set { inputText = value; OnPropertyChanged(); }
+        }
+        public bool IsRefreshEnable
+        {
+            get { return isRefreshEnable; }
+            set { isRefreshEnable = value; OnPropertyChanged(); }
+        }
         #endregion
         #region METHODS
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -61,9 +73,10 @@ namespace Gaez.BakeryHouse.ViewModels
             IsScrollEnable = true; // Habilita el Scroll
             IsContentViewVisible = false; // Oculta el contenido de la pagina
             IsSearchViewVisible = false; // Oculta la pagina de busqueda
+            InputText = ""; // Texto de busqueda vacio
+            IsRefreshEnable = true; // Refresh habilitado
         }
         #endregion
-        public event PropertyChangedEventHandler PropertyChanged;
-        
+        public event PropertyChangedEventHandler PropertyChanged;     
     }
 }

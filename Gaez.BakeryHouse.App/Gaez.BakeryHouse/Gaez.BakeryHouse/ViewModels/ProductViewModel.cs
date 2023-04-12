@@ -88,8 +88,22 @@ namespace Gaez.BakeryHouse.ViewModels
         }
         public void LoadData()
         {
-            if (Product == null)
-                GetProductJsonParameter();
+            base.OnAppering();
+            try
+            {
+                if (Product == null)
+                    GetProductJsonParameter();
+            }
+            catch(Exception ex) 
+            {
+                // Si ocurre un error
+                IsRefreshVisible = false; // Oculta el RefreshView
+                IsContentViewVisible = false; // Oculta el contenido de la pagina 
+                throw;
+            }
+            // Si todo sale bien
+            IsRefreshVisible = false; // Oculta el RefreshView
+            IsContentViewVisible = true; // Muestra el contenido de la pagina
         }
         #endregion
         #region COMMANDS
@@ -110,7 +124,8 @@ namespace Gaez.BakeryHouse.ViewModels
                 RatingCollectionBar[i].RatingColor = Color.Yellow;
                 RatingCollectionBar[i].IsRatingPressed = true;
             }
-        });   
+        });
+        public ICommand OnRefreshCommand => new Command(() => LoadData());
         #endregion
     }
 }

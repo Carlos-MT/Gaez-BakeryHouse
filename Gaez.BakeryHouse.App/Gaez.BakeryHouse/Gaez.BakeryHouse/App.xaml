@@ -50,8 +50,8 @@
                 <Setter Property="HasShadow" Value="False"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource superLightGrayColor}"/>
             </Style>
-            <Style TargetType="controls:CustomLabel" x:Key="labelGenericStyle" BasedOn="{StaticResource labelProductApplicationStyle}">
-               
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericStyle" >
+                <Setter Property="TextColor" Value="Black"/>
             </Style>
             <Style TargetType="controls:CustomLabel" x:Key="labelGenericMediumStyle" BasedOn="{StaticResource labelProductNameStyle}">
 
@@ -84,21 +84,15 @@
                 <Setter Property="BorderColor" Value="{StaticResource primaryColor}"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}"/>
             </Style>
-
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericSmallStyle" >
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
             <!-- Modificar para despues -->
             <Style TargetType="Shell" x:Key="shellStyle">
                 <Setter Property="Shell.ForegroundColor" Value="Black"/>
                 <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
-            </Style>
-            <Style TargetType="Label" x:Key="subPriLabel">
-                <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="Subtitle"/>
-            </Style>
-            <Style TargetType="Label" x:Key="subSecLabel">
-                <Setter Property="TextColor" Value="{StaticResource primaryColor}"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="Small"/>
             </Style>
             <Style TargetType="Label" x:Key="iconLabel">
                 <Setter Property="TextColor" Value="Black"/>
