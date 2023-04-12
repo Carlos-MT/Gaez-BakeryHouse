@@ -4,11 +4,7 @@
        xmlns:views="clr-namespace:Gaez.BakeryHouse.Views"
        Style="{StaticResource shellStyle}"
        x:Class="Gaez.BakeryHouse.AppShell">
-
     <FlyoutItem Title="Inicio">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
-        </Tab>
+        <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
     </FlyoutItem>
-    
 </Shell>

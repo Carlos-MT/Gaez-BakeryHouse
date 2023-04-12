@@ -15,6 +15,9 @@ namespace Gaez.BakeryHouse.Data.Entities
         public int ClientId { get; set; }
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
+        public string FirstName { get; set; }
+        public string FatherLastName { get; set; }
+        public string MotherLastName { get; set; }
 
         public virtual ShoppingCartBelongsToClient? ShoppingCartBelongsToClient { get; set; }
         public virtual ICollection<ClientMakesComment> ClientMakesComments { get; set; }

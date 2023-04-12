@@ -1,12 +1,16 @@
 ﻿using Gaez.BakeryHouse.API.Models;
 using Gaez.BakeryHouse.Classes;
 using Gaez.BakeryHouse.Services;
+using Gaez.BakeryHouse.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -62,6 +66,7 @@ namespace Gaez.BakeryHouse.ViewModels
             // Si todo sale bien
             IsRefreshVisible = false; // Oculta el RefreshView
             IsContentViewVisible = true; // Muestra el contenido de la pagina
+            IsSearchEnable = true; // Habilita el SearchBar
         }
         #endregion
         #region COMMANDS
@@ -72,7 +77,8 @@ namespace Gaez.BakeryHouse.ViewModels
 
             if(string.IsNullOrWhiteSpace(inputText))
             {
-               // Si la cadena de texto es nula o contiene espacios en blanco
+                // Si la cadena de texto es nula o contiene espacios en blanco
+                IsRefreshEnable = true; // Habilita el refresh
                 IsScrollEnable = true; // Habilita el Scroll
                 IsContentViewVisible = true; // Muestra la pagina de contenido
                 IsSearchViewVisible = false; // Oculta la pagina de busqueda
@@ -85,8 +91,18 @@ namespace Gaez.BakeryHouse.ViewModels
                 IsScrollEnable = false; // Deshabilita el scroll
                 IsContentViewVisible = false; // Oculta la pagina de contenido
                 IsSearchViewVisible = true; // Muestra la pagina de busqueda
+                IsRefreshEnable = false; // Deshabilita el refresh
                 ProductCollection = Convert<ProductModel>(AuxProductCollection.Where(p => p.ProductName.ToLower().Contains(inputText.ToLower())).ToList()); // Filtra la lista
             }
+        });
+        public ICommand OnItemSelectedCommand => new Command<ProductModel>(async (p) =>
+        {
+            // Al presionar un item del CollectionView
+            IsSearchViewVisible = false; // Se oculta el CollectionView *** Previene que el usuario de doble clic a un item ***
+
+            var model = JsonConvert.SerializeObject(p);
+            var modelEncoded = HttpUtility.UrlEncode(model);
+            await Shell.Current.GoToAsync($"{nameof(ProductPage)}?{nameof(ProductViewModel.ProductJson)}={modelEncoded}");
         });
         #endregion
     }

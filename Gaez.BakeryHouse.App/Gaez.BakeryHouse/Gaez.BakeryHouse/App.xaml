@@ -1,23 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
              x:Class="Gaez.BakeryHouse.App">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="primaryColor">#ff6a0e</Color>
+            <Color x:Key="secondaryColor">#FFDAC3</Color>
+            <Color x:Key="superLightGrayColor">#F3F3F3</Color>
+            <Color x:Key="grayColor">#9A9999</Color>
+
+            <Style TargetType="Frame" x:Key="primaryProductImageStyle">
+                <Setter Property="HeightRequest" Value="230"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource superLightGrayColor}"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="secondaryProductImageStyle">
+
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelProductPriceStyle">
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelProductNameStyle">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="forLabelProductNameStyle">
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="{StaticResource grayColor}"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelProductApplicationStyle">
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelProductStockStyle">
+                <Setter Property="FontSize" Value="Subtitle"/>
+                <Setter Property="TextColor" Value="Green"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="auxButtonStyle">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource superLightGrayColor}"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericStyle" >
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericMediumStyle" BasedOn="{StaticResource labelProductNameStyle}">
+
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="ratingBarStyle">
+                <Setter Property="FontFamily" Value="typicons"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Title"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="frameEditorStyle">
+                <Setter Property="HeightRequest" Value="100"/>
+                <Setter Property="Padding" Value="10,0"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BorderColor" Value="{StaticResource grayColor}"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="primaryButtonStyle" BasedOn="{StaticResource auxButtonStyle}">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource primaryColor}"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="secondaryButtonStyle" BasedOn="{StaticResource auxButtonStyle}">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BorderColor" Value="{StaticResource primaryColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericSmallStyle" >
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <!-- Modificar para despues -->
             <Style TargetType="Shell" x:Key="shellStyle">
                 <Setter Property="Shell.ForegroundColor" Value="Black"/>
                 <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
-            </Style>
-            <Style TargetType="Label" x:Key="subPriLabel">
-                <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="Subtitle"/>
-            </Style>
-            <Style TargetType="Label" x:Key="subSecLabel">
-                <Setter Property="TextColor" Value="{StaticResource primaryColor}"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="Small"/>
             </Style>
             <Style TargetType="Label" x:Key="iconLabel">
                 <Setter Property="TextColor" Value="Black"/>

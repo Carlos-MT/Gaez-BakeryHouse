@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gaez.BakeryHouse.API.Models
 {
-    public class ProductModel : INotifyPropertyChanged
+    public class ProductModel
     {
         public int ProductCode { get; set; }
         public string ProductName { get; set; }
@@ -16,7 +16,5 @@ namespace Gaez.BakeryHouse.API.Models
         public string Application { get; set; }
         public int Stock { get; set; }
         public byte[] ProductImage { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

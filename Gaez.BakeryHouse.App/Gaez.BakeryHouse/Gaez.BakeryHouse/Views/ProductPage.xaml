@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             xmlns:bh="clr-namespace:Gaez.BakeryHouse.Behaviors"
+             x:Class="Gaez.BakeryHouse.Views.ProductPage">
+
+    <ContentPage.BindingContext>
+        <vm:ProductViewModel/>
+    </ContentPage.BindingContext>
+    <RefreshView RefreshColor="{StaticResource primaryColor}"
+                 IsRefreshing="{Binding IsRefreshVisible}"
+                 Command="{Binding OnRefreshCommand}">
+        <Grid RowDefinitions="Auto,Auto,Auto"
+              IsVisible="{Binding IsContentViewVisible}"
+              RowSpacing="0">
+            <ScrollView Grid.Row="0"
+                        HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never">
+                <Grid RowSpacing="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Frame Grid.Row="0"
+                           Style="{StaticResource primaryProductImageStyle}">
+                        <StackLayout Orientation="Horizontal">
+                            <controls:CustomLabel Style="{StaticResource labelProductPriceStyle}"
+                                                      VerticalOptions="End">
+                                <controls:CustomLabel.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="$ "/>
+                                        <Span Text="{Binding Product.RegularPrice}"/>
+                                    </FormattedString>
+                                </controls:CustomLabel.FormattedText>
+                            </controls:CustomLabel>
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Grid.Row="1"
+                                 Spacing="0"
+                                 Margin="10,0">
+                        <controls:CustomLabel Style="{StaticResource labelProductNameStyle}" 
+                                              Text="{Binding Product.ProductName}"/>
+                        <controls:CustomLabel Style="{StaticResource forLabelProductNameStyle}" 
+                                              Text="Por Gaez Bakery House"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="2"
+                                 Margin="10,0">
+                        <controls:CustomLabel Style="{StaticResource labelProductApplicationStyle}"
+                                              Text="{Binding Product.Application}"/>
+                    </StackLayout>
+                    <controls:CustomLabel Grid.Row="3"
+                                          Margin="10,0"
+                                          Style="{StaticResource labelProductStockStyle}"
+                                          Text="Stock disponible"/>
+                    <Frame Grid.Row="4"
+                           Margin="10,0"
+                           Style="{StaticResource auxButtonStyle}"
+                           xct:TouchEffect.NativeAnimation="True">
+                        <StackLayout Orientation="Horizontal"
+                                         Margin="10,0">
+                            <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                                                      VerticalOptions="Center">
+                                <controls:CustomLabel.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Cantidad: "/>
+                                        <Span Text="1"/>
+                                    </FormattedString>
+                                </controls:CustomLabel.FormattedText>
+                            </controls:CustomLabel>
+                            <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                                                      VerticalOptions="Center"
+                                                      FontAttributes="Bold"
+                                                      TextColor="{StaticResource grayColor}">
+                                <controls:CustomLabel.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="( "/>
+                                        <Span Text="{Binding Product.Stock}"/>
+                                        <Span Text=" disponibles )"/>
+                                    </FormattedString>
+                                </controls:CustomLabel.FormattedText>
+                            </controls:CustomLabel>
+                            <controls:CustomLabel Style="{StaticResource iconLabel}"
+                                                      VerticalOptions="Center"
+                                                      FontSize="Title"
+                                                      HorizontalOptions="EndAndExpand"
+                                                      Text="{Static fonts:IconFont.ChevronRight}">
+                            </controls:CustomLabel>
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Grid.Row="5"
+                                     Spacing="20"
+                                     Orientation="Horizontal"
+                                     HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal"
+                                     xct:TouchEffect.NativeAnimation="True">
+                            <Label Style="{StaticResource iconLabel}"
+                                       VerticalOptions="Center"
+                                       Text="{Static fonts:IconFont.HeartOutline}"/>
+                            <Label Style="{StaticResource labelGenericStyle}"
+                                       VerticalOptions="Center"
+                                       Text="Agregar a favoritos"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     xct:TouchEffect.NativeAnimation="True">
+                            <Label Style="{StaticResource iconLabel}"
+                                       VerticalOptions="Center"
+                                       Text="{Static fonts:IconFont.ExportOutline}"/>
+                            <Label Style="{StaticResource labelGenericStyle}"
+                                       VerticalOptions="Center"
+                                       Text="Compartir"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <BoxView Grid.Row="6"
+                                 HeightRequest="1"
+                                 BackgroundColor="{StaticResource grayColor}"/>
+                    <StackLayout Grid.Row="7"
+                                 Orientation="Horizontal"
+                                 Margin="10,0">
+                        <controls:CustomLabel Text="Dejanos tu opinión"
+                                              VerticalOptions="Center"
+                                              Style="{StaticResource labelGenericMediumStyle}"/>
+                        <CollectionView ItemsSource="{Binding RatingCollectionBar}"
+                                        WidthRequest="130"
+                                        HeightRequest="25"
+                                        HorizontalOptions="EndAndExpand"
+                                        x:Name="cv"
+                                        VerticalOptions="Center">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 HorizontalItemSpacing="3"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:CustomLabel Text="{Binding RatingIcon}"
+                                                          TextColor="{Binding RatingColor}"
+                                                          Style="{StaticResource ratingBarStyle}"
+                                                          xct:TouchEffect.Command="{Binding Path=BindingContext.OnRatingClickedCommand, Source={x:Reference cv}}"
+                                                          xct:TouchEffect.CommandParameter="{Binding .}"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                    <Frame Grid.Row="8"
+                           Margin="10,0"
+                           Style="{StaticResource frameEditorStyle}">
+                        <controls:CustomEditor Placeholder="Escribe tu opinión...."/>
+                    </Frame>
+                    <Frame Grid.Row="9"
+                           Margin="10,0"
+                           Style="{StaticResource primaryButtonStyle}"
+                           xct:TouchEffect.NativeAnimation="True">
+                        <StackLayout VerticalOptions="Center"
+                                         HorizontalOptions="Center">
+                            <controls:CustomLabel Style="{StaticResource labelGenericMediumStyle}"
+                                                      TextColor="White"
+                                                      Text="Opinar"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+            <Grid Grid.Row="2"
+                  RowSpacing="10"
+                  RowDefinitions="Auto,Auto,Auto">
+                <BoxView Grid.Row="0"
+                         HeightRequest="1"
+                         BackgroundColor="{StaticResource grayColor}"/>
+                <Frame Grid.Row="1"
+                       Margin="10,0"
+                       Style="{StaticResource primaryButtonStyle}"
+                       xct:TouchEffect.NativeAnimation="True">
+                    <StackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center">
+                        <controls:CustomLabel Style="{StaticResource labelGenericMediumStyle}"
+                                              TextColor="White"
+                                              Text="Comprar ahora"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="2"
+                       Margin="10,0"
+                       Style="{StaticResource secondaryButtonStyle}"
+                       xct:TouchEffect.NativeAnimation="True">
+                    <StackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center">
+                        <controls:CustomLabel Style="{StaticResource labelGenericMediumStyle}"
+                                              TextColor="{StaticResource primaryColor}"
+                                              Text="Agregar al carrito"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </RefreshView>
+</ContentPage>
