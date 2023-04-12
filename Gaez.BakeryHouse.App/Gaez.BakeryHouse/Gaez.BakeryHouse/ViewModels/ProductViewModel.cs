@@ -1,6 +1,7 @@
 ﻿using Gaez.BakeryHouse.API.Models;
 using Gaez.BakeryHouse.Fonts;
 using Gaez.BakeryHouse.Models;
+using Gaez.BakeryHouse.Services;
 using Newtonsoft.Json;
 using Refit;
 using System;
@@ -19,6 +20,8 @@ namespace Gaez.BakeryHouse.ViewModels
         private string _productJson;
         private ProductModel _product;
         private ObservableCollection<RatingModel> _ratingCollectionBar;
+        private ObservableCollection<CommentModel> _commentsCollection;
+        private readonly CommentService _commentService;
         #endregion
         #region PROPERTIES
         public string ProductJson
@@ -36,10 +39,16 @@ namespace Gaez.BakeryHouse.ViewModels
             get { return _ratingCollectionBar; }
             set { _ratingCollectionBar = value; OnPropertyChanged(); }
         }
+        public ObservableCollection<CommentModel> CommentsCollection
+        {
+            get { return _commentsCollection; }
+            set { _commentsCollection = value; OnPropertyChanged(); }
+        }
         #endregion
         #region CONSTRUCTOR
         public ProductViewModel()
         {
+            _commentService = new CommentService();
             RatingCollectionBar = new ObservableCollection<RatingModel>
             {
                 new RatingModel()
@@ -77,7 +86,8 @@ namespace Gaez.BakeryHouse.ViewModels
                     IsRatingPressed = false,
                     RatingId = 4
                 }
-            };  
+            };
+            CommentsCollection = new ObservableCollection<CommentModel>();
         }
         #endregion
         #region METHODS
@@ -86,13 +96,16 @@ namespace Gaez.BakeryHouse.ViewModels
             var product = JsonConvert.DeserializeObject<ProductModel>(ProductJson);
             Product = product;
         }
-        public void LoadData()
+        public async void LoadData()
         {
             base.OnAppering();
             try
             {
                 if (Product == null)
                     GetProductJsonParameter();
+
+                CommentsCollection.Clear();
+                CommentsCollection = Convert<CommentModel>(await _commentService.GetAllCommentsForProduct(Product.ProductCode));
             }
             catch(Exception ex) 
             {

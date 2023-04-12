@@ -27,7 +27,8 @@
                CornerRadius="10"
                HasShadow="False"
                Padding="0">
-            <controls:CustomSearchBar Text="{Binding InputText}">
+            <controls:CustomSearchBar Text="{Binding InputText}"
+                                      IsEnabled="{Binding IsSearchEnable}">
                 <controls:CustomSearchBar.Behaviors>
                     <bh:TextChangedToCommandBehavior Command="{Binding OnSearchCommand}"/>
                 </controls:CustomSearchBar.Behaviors>

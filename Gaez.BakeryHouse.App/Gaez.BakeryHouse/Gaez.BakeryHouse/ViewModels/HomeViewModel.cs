@@ -66,6 +66,7 @@ namespace Gaez.BakeryHouse.ViewModels
             // Si todo sale bien
             IsRefreshVisible = false; // Oculta el RefreshView
             IsContentViewVisible = true; // Muestra el contenido de la pagina
+            IsSearchEnable = true; // Habilita el SearchBar
         }
         #endregion
         #region COMMANDS
