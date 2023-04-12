@@ -27,6 +27,7 @@ namespace Gaez.BakeryHouse
 
             services.AddTransient<CategoryService, CategoryService>();
             services.AddTransient<ProductService, ProductService>();
+            services.AddTransient<CommentService, CommentService>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

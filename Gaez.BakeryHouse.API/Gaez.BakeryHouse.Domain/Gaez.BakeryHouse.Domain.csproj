@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gaez.BakeryHouse.Data\Gaez.BakeryHouse.Data.csproj" />
+    <ProjectReference Include="..\Gaez.BakeryHouse.Utils\Gaez.BakeryHouse.Utils.csproj" />
   </ItemGroup>
 
 </Project>
