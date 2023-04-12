@@ -1,12 +1,16 @@
 ﻿using Gaez.BakeryHouse.API.Models;
 using Gaez.BakeryHouse.Classes;
 using Gaez.BakeryHouse.Services;
+using Gaez.BakeryHouse.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -87,6 +91,13 @@ namespace Gaez.BakeryHouse.ViewModels
                 IsSearchViewVisible = true; // Muestra la pagina de busqueda
                 ProductCollection = Convert<ProductModel>(AuxProductCollection.Where(p => p.ProductName.ToLower().Contains(inputText.ToLower())).ToList()); // Filtra la lista
             }
+        });
+        public ICommand OnItemSelectedCommand => new Command<ProductModel>(async (p) =>
+        {
+            var model = JsonConvert.SerializeObject(p);
+            var modelEncoded = HttpUtility.UrlEncode(model);
+
+            await Shell.Current.GoToAsync($"{nameof(ProductPage)}?{nameof(ProductViewModel.ProductJson)}={modelEncoded}");
         });
         #endregion
     }

@@ -16,6 +16,7 @@ namespace Gaez.BakeryHouse.ViewModels
         private bool isRefreshVisible;
         private bool isScrollEnable;
         private bool isSearchViewVisible;
+        private bool isPressed;
         #endregion
         #region PROPERTIES
         public bool IsContentViewVisible
@@ -37,6 +38,11 @@ namespace Gaez.BakeryHouse.ViewModels
         {
             get { return isSearchViewVisible; }
             set { isSearchViewVisible = value; OnPropertyChanged(); }
+        }
+        public bool IsPressed
+        {
+            get { return isPressed; }
+            set { isPressed = value; OnPropertyChanged(); }
         }
         #endregion
         #region METHODS
