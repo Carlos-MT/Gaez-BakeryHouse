@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -21,11 +22,11 @@ namespace Gaez.BakeryHouse.ViewModels
         private ProductModel _product;
         private ObservableCollection<RatingModel> _ratingCollectionBar;
         private ObservableCollection<CommentModel> _commentsCollection;
-        private ObservableCollection<CommentModel> _onlyThreeComentsCollection;
         private readonly CommentService _commentService;
         private int totalQualifications;
         private double productQualification;
         private ObservableCollection<RatingModel> _productRatingCollectionBar;
+        private ObservableCollection<CommentModel> _onlyThreeCommentsCollection;
         #endregion
         #region PROPERTIES
         public string ProductJson
@@ -42,7 +43,7 @@ namespace Gaez.BakeryHouse.ViewModels
         {
             get { return _ratingCollectionBar; }
             set { _ratingCollectionBar = value; OnPropertyChanged(); }
-        }
+        } // Barra con la que interactua el usuario
         public ObservableCollection<CommentModel> CommentsCollection
         {
             get { return _commentsCollection; }
@@ -58,23 +59,22 @@ namespace Gaez.BakeryHouse.ViewModels
             get { return productQualification; }
             set {  productQualification = value; OnPropertyChanged(); }
         } // Calificacion del producto
-        public ObservableCollection<CommentModel> OnlyThreeCommentsCollection
-        {
-            get { return _onlyThreeComentsCollection; }
-            set { _onlyThreeComentsCollection = value; OnPropertyChanged(); }
-        }
         public ObservableCollection<RatingModel> ProductRatingCollectionBar
         {
             get { return _productRatingCollectionBar; }
             set { _productRatingCollectionBar = value; OnPropertyChanged(); }
         } // Barra de rating del producto
+        public ObservableCollection<CommentModel> OnlyThreeCommentsCollection
+        {
+            get { return _onlyThreeCommentsCollection; }
+            set { _onlyThreeCommentsCollection = value; OnPropertyChanged(); }
+        }
         #endregion
         #region CONSTRUCTOR
         public ProductViewModel()
         {
             _commentService = new CommentService();
             CommentsCollection = new ObservableCollection<CommentModel>();
-            OnlyThreeCommentsCollection = new ObservableCollection<CommentModel>();
         }
         #endregion
         #region METHODS
@@ -83,7 +83,7 @@ namespace Gaez.BakeryHouse.ViewModels
             var product = JsonConvert.DeserializeObject<ProductModel>(ProductJson);
             Product = product;
         }
-        public async void LoadData()
+        public async Task LoadData()
         {
             base.OnAppering();
             InitRatingCollectionBar(); // Creación del RatingCollectionBar
@@ -92,12 +92,9 @@ namespace Gaez.BakeryHouse.ViewModels
                 if (Product == null)
                     GetProductJsonParameter();
 
-                OnlyThreeCommentsCollection.Clear();
                 CommentsCollection.Clear();
-                OnlyThreeCommentsCollection = Convert<CommentModel>(await _commentService.GetOnlyThreeCommentsForProduct(Product.ProductCode));
                 CommentsCollection = Convert<CommentModel>(await _commentService.GetAllCommentsForProduct(Product.ProductCode));
                 
-
                 // Si la CommentsCollection no tiene elementos
                 if (CommentsCollection.Count == 0)
                     IsCommentsViewVisible = false; // Oculta la pagina de comentarios
@@ -123,16 +120,18 @@ namespace Gaez.BakeryHouse.ViewModels
         }
         private void LoadValorationStarsCollection()
         {
+            OnlyThreeCommentsCollection = new ObservableCollection<CommentModel>(); // Lista para guardar solo 3 comentarios
+
             // Accedo a cada objeto
-            for(int i = 0; i < OnlyThreeCommentsCollection.Count; i++) 
+            for(int i = 0; i < CommentsCollection.Count; i++) 
             {
                 // Inicializa la lista de estrellas de cada objeto comentario
-                OnlyThreeCommentsCollection[i].ValorationStarsCollection = new ObservableCollection<RatingModel>();
+                CommentsCollection[i].ValorationStarsCollection = new ObservableCollection<RatingModel>();
                 
                 // Por cada lista de estrellas, se agregan 5 estrellas y se inician con lo valores por defecto
                 for(int j = 0; j < 5; j++)
                 {
-                    OnlyThreeCommentsCollection[i].ValorationStarsCollection.Add(new RatingModel()
+                    CommentsCollection[i].ValorationStarsCollection.Add(new RatingModel()
                     {
                         RatingIcon = IconFont.StarOutline,
                         RatingColor = Color.FromHex("#9A9999"),
@@ -141,12 +140,16 @@ namespace Gaez.BakeryHouse.ViewModels
                 }
 
                 // Por cada objeto comentario, se pintan las estrellas correspondientes en base a su valoracion
-                for (int k = 0; k < OnlyThreeCommentsCollection[i].Valoration; k++)
+                for (int k = 0; k < CommentsCollection[i].Valoration; k++)
                 {
-                    OnlyThreeCommentsCollection[i].ValorationStarsCollection[k].RatingIcon = IconFont.StarFullOutline;
-                    OnlyThreeCommentsCollection[i].ValorationStarsCollection[k].RatingColor = Color.Yellow;
-                    OnlyThreeCommentsCollection[i].ValorationStarsCollection[k].IsRatingPressed = true;
+                    CommentsCollection[i].ValorationStarsCollection[k].RatingIcon = IconFont.StarFullOutline;
+                    CommentsCollection[i].ValorationStarsCollection[k].RatingColor = Color.Yellow;
+                    CommentsCollection[i].ValorationStarsCollection[k].IsRatingPressed = true;
                 }
+
+                // Solo se guardan tres comentarios
+                if (i < 3)
+                    OnlyThreeCommentsCollection.Add(CommentsCollection[i]);
             }
         }
         private void InitRatingCollectionBar()
@@ -164,6 +167,15 @@ namespace Gaez.BakeryHouse.ViewModels
                     IsRatingPressed = false,
                     RatingId = i
                 });
+
+                // Pintar una estrella por defecto
+                if (i == 0)
+                {
+                    RatingCollectionBar[i].RatingIcon = IconFont.StarFullOutline;
+                    RatingCollectionBar[i].RatingColor = Color.Yellow;
+                    RatingCollectionBar[i].IsRatingPressed = true;
+                    RatingCollectionBar[i].RatingId = i;
+                }
             }
         }
         private void InitProductRatingCollectionBar()
@@ -199,7 +211,6 @@ namespace Gaez.BakeryHouse.ViewModels
                 totalValorations += CommentsCollection[i].Valoration; // Se suman todas las calificaciones
 
             ProductQualification = ( (double)totalValorations / (double)TotalQualifications );
-            // ProductQualification = Math.Round(ProductQualification, 1);
         }
         #endregion
         #region COMMANDS
@@ -221,7 +232,50 @@ namespace Gaez.BakeryHouse.ViewModels
                 RatingCollectionBar[i].IsRatingPressed = true;
             }
         });
-        public ICommand OnRefreshCommand => new Command(() => LoadData());
+        public ICommand OnCommentClickedCommand => new Command(async () =>
+        {
+            IsButtonEnabled = false; // Se deshabilitan los botones
+            int acountStars = 0;
+            ReturnInfo info = new ReturnInfo();
+            CommentModel comment;
+            
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(InputText))
+                    await Shell.Current.DisplayAlert("Mensaje", "Por favor deja un comentario", "Ok");
+                else
+                {
+                    IsContentViewVisible = false; // Se oculta todo el contenido
+
+                    for (int i = 0; i < RatingCollectionBar.Count; i++)
+                        if (RatingCollectionBar[i].IsRatingPressed)
+                            acountStars++;
+
+                    comment = new CommentModel()
+                    {
+                        CommentDate = DateTime.Now,
+                        Description = InputText,
+                        Valoration = acountStars,
+                    };
+
+                    info = await _commentService.PostComment(comment, 1, Product.ProductCode);
+
+                    if(info.Result == ResultCode.Success)
+                        await Shell.Current.DisplayAlert("Mensaje", "Comentario realizado con exito", "Ok");
+                }
+            }
+            catch(Exception e)
+            {
+                // Si ocurre un error
+                IsRefreshVisible = false; // Oculta el RefreshView
+                IsContentViewVisible = false; // Oculta el contenido de la pagina 
+                await Shell.Current.DisplayAlert("ERROR", "No se pudo realizar el comentario", "Ok");
+            }
+
+            await LoadData();
+        });
+        public ICommand OnRefreshCommand => new Command(async () =>  await LoadData());
         #endregion
     }
 }

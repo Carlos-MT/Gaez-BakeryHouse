@@ -35,19 +35,6 @@ namespace Gaez.BakeryHouse.Services
                 throw; 
             }
         }
-        public async Task<IEnumerable<CommentModel>> GetOnlyThreeCommentsForProduct(int productCode)
-        {
-            try
-            {
-                var apiResponse = RestService.For<ICommentService>(httpClient);
-                var response = await apiResponse.GetOnlyThreeCommentsForProduct(productCode);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
         #endregion
     }
 }

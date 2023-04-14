@@ -17,7 +17,7 @@ namespace Gaez.BakeryHouse.ViewModels
         private bool isScrollEnable;
         private bool isSearchViewVisible;
         private bool isSearchEnable;
-        private bool isPressed;
+        private bool isButtonEnabled;
         private bool isRefreshEnable;
         private bool isCommentsViewVisible;
         private string inputText;
@@ -43,10 +43,10 @@ namespace Gaez.BakeryHouse.ViewModels
             get { return isSearchViewVisible; }
             set { isSearchViewVisible = value; OnPropertyChanged(); }
         }
-        public bool IsPressed
+        public bool IsButtonEnabled
         {
-            get { return isPressed; }
-            set { isPressed = value; OnPropertyChanged(); }
+            get { return isButtonEnabled; }
+            set { isButtonEnabled = value; OnPropertyChanged(); }
         }
         public string InputText
         {
@@ -89,6 +89,7 @@ namespace Gaez.BakeryHouse.ViewModels
             IsRefreshEnable = true; // Refresh habilitado
             IsSearchEnable = false; // Deshabilitar el SearchBar
             IsCommentsViewVisible = false; // Oculta la pagina de comentarios
+            IsButtonEnabled = true; // Habilitar los botones
         }
         #endregion
         public event PropertyChangedEventHandler PropertyChanged;     

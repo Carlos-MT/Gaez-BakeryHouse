@@ -14,8 +14,5 @@ namespace Gaez.BakeryHouse.Interfaces
 
         [Get("/Comment/GetAllCommentsForProduct")]
         Task<IEnumerable<CommentModel>> GetAllCommentsForProduct(int productCode);
-
-        [Get("/Comment/GetOnlyThreeCommentsForProduct")]
-        Task<IEnumerable<CommentModel>> GetOnlyThreeCommentsForProduct(int productCode);
     }
 }

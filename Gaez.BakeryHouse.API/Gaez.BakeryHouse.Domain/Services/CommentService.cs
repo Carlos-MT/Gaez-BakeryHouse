@@ -77,12 +77,8 @@ namespace Gaez.BakeryHouse.Domain.Services
             try
             {
                 var query = from t1 in commentsRepo.GetAll()
-                            join t2 in clientCommentsRepo.GetAll()
-                            on t1.CommentId equals t2.CommentId
                             join t3 in productHasCommentRepo.GetAll()
                             on t1.CommentId equals t3.CommentId
-                            join t4 in clientRepo.GetAll()
-                            on t2.ClientId equals t4.ClientId
                             where t3.ProductCode == productCode
                             orderby t1.CommentDate descending
                             select new CommentModel()
@@ -90,42 +86,8 @@ namespace Gaez.BakeryHouse.Domain.Services
                                 CommentId = t1.CommentId,
                                 CommentDate = t1.CommentDate,
                                 Description = t1.Description,
-                                Valoration = t1.Valoration,
-                                FirstName = t4.FirstName,
-                                FatherLastName = t4.FatherLastName,
-                                MotherLastName = t4.MotherLastName,
+                                Valoration = t1.Valoration
                             };
-                return query;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
-        public IEnumerable<CommentModel> GetOnlyThreeCommentsForProduct(int productCode)
-        {
-            try
-            {
-                var query = (from t1 in commentsRepo.GetAll()
-                            join t2 in clientCommentsRepo.GetAll()
-                            on t1.CommentId equals t2.CommentId
-                            join t3 in productHasCommentRepo.GetAll()
-                            on t1.CommentId equals t3.CommentId
-                            join t4 in clientRepo.GetAll()
-                            on t2.ClientId equals t4.ClientId
-                            where t3.ProductCode == productCode
-                            orderby t1.CommentDate descending
-                            select new CommentModel()
-                            {
-                                CommentId = t1.CommentId,
-                                CommentDate = t1.CommentDate,
-                                Description = t1.Description,
-                                Valoration = t1.Valoration,
-                                FirstName = t4.FirstName,
-                                FatherLastName = t4.FatherLastName,
-                                MotherLastName = t4.MotherLastName
-                            }).Take(3);
-
                 return query;
             }
             catch (Exception e)

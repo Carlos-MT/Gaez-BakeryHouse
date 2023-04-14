@@ -154,12 +154,14 @@
                     <Frame Grid.Row="8"
                            Margin="10,0"
                            Style="{StaticResource frameEditorStyle}">
-                        <controls:CustomEditor Placeholder="Escribe tu opinión...."/>
+                        <controls:CustomEditor Text="{Binding InputText}" 
+                                               Placeholder="Escribe tu opinión...."/>
                     </Frame>
                     <Frame Grid.Row="9"
                            Margin="10,0"
                            Style="{StaticResource primaryButtonStyle}"
-                           xct:TouchEffect.NativeAnimation="True">
+                           xct:TouchEffect.NativeAnimation="True"
+                           xct:TouchEffect.Command="{Binding OnCommentClickedCommand}">
                         <StackLayout VerticalOptions="Center"
                                          HorizontalOptions="Center">
                             <controls:CustomLabel Style="{StaticResource labelGenericMediumStyle}"
@@ -170,7 +172,6 @@
                     <BoxView Grid.Row="10"
                              HeightRequest="1"
                              BackgroundColor="{StaticResource grayColor}"/>
-                    
                     <!--Comments view-->
                     <StackLayout Grid.Row="11"
                                  IsVisible="{Binding IsCommentsViewVisible}"

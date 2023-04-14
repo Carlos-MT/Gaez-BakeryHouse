@@ -40,20 +40,6 @@ namespace Gaez.BakeryHouse.Controllers
                 throw;
             }
         }
-
-        [HttpGet("GetOnlyThreeCommentsForProduct")]
-        public IEnumerable<CommentModel> GetOnlyThreeCommentsForProduct(int productCode)
-        {
-            try
-            {
-                var reponse = commentService.GetOnlyThreeCommentsForProduct(productCode);
-                return reponse;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
         #endregion
     }
 }
