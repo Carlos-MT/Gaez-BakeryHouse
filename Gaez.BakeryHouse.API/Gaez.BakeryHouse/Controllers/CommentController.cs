@@ -26,6 +26,7 @@ namespace Gaez.BakeryHouse.Controllers
             returnInfo = commentService.PostComment(comment, clientId, productCode);
             return returnInfo;
         }
+
         [HttpGet("GetAllCommentsForProduct")]
         public IEnumerable<CommentModel> GetAllCommentsForProduct(int productCode)
         {
@@ -35,6 +36,20 @@ namespace Gaez.BakeryHouse.Controllers
                 return reponse;
             }
             catch (Exception ex) 
+            {
+                throw;
+            }
+        }
+
+        [HttpGet("GetOnlyThreeCommentsForProduct")]
+        public IEnumerable<CommentModel> GetOnlyThreeCommentsForProduct(int productCode)
+        {
+            try
+            {
+                var reponse = commentService.GetOnlyThreeCommentsForProduct(productCode);
+                return reponse;
+            }
+            catch (Exception ex)
             {
                 throw;
             }
