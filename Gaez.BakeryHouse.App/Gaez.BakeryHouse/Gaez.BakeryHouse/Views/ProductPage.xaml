@@ -6,6 +6,7 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
              xmlns:bh="clr-namespace:Gaez.BakeryHouse.Behaviors"
+             x:Name="productPage"
              x:Class="Gaez.BakeryHouse.Views.ProductPage">
 
     <ContentPage.BindingContext>
@@ -14,7 +15,7 @@
     <RefreshView RefreshColor="{StaticResource primaryColor}"
                  IsRefreshing="{Binding IsRefreshVisible}"
                  Command="{Binding OnRefreshCommand}">
-        <Grid RowDefinitions="Auto,Auto,Auto"
+        <Grid RowDefinitions="Auto,Auto"
               IsVisible="{Binding IsContentViewVisible}"
               RowSpacing="0">
             <ScrollView Grid.Row="0"
@@ -22,6 +23,9 @@
                         VerticalScrollBarVisibility="Never">
                 <Grid RowSpacing="20">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -131,36 +135,33 @@
                         <controls:CustomLabel Text="Dejanos tu opinión"
                                               VerticalOptions="Center"
                                               Style="{StaticResource labelGenericMediumStyle}"/>
-                        <CollectionView ItemsSource="{Binding RatingCollectionBar}"
-                                        WidthRequest="130"
-                                        HeightRequest="25"
-                                        HorizontalOptions="EndAndExpand"
-                                        x:Name="cv"
-                                        VerticalOptions="Center">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"
-                                                 HorizontalItemSpacing="3"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="0"
+                                     HorizontalOptions="EndAndExpand"
+                                     x:Name="stack"
+                                     BindableLayout.ItemsSource="{Binding RatingCollectionBar}">
+                            <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <controls:CustomLabel Text="{Binding RatingIcon}"
                                                           TextColor="{Binding RatingColor}"
                                                           Style="{StaticResource ratingBarStyle}"
-                                                          xct:TouchEffect.Command="{Binding Path=BindingContext.OnRatingClickedCommand, Source={x:Reference cv}}"
+                                                          xct:TouchEffect.Command="{Binding Path=BindingContext.OnRatingClickedCommand, Source={x:Reference stack}}"
                                                           xct:TouchEffect.CommandParameter="{Binding .}"/>
                                 </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
                     </StackLayout>
                     <Frame Grid.Row="8"
                            Margin="10,0"
                            Style="{StaticResource frameEditorStyle}">
-                        <controls:CustomEditor Placeholder="Escribe tu opinión...."/>
+                        <controls:CustomEditor Text="{Binding InputText}" 
+                                               Placeholder="Escribe tu opinión...."/>
                     </Frame>
                     <Frame Grid.Row="9"
                            Margin="10,0"
                            Style="{StaticResource primaryButtonStyle}"
-                           xct:TouchEffect.NativeAnimation="True">
+                           xct:TouchEffect.NativeAnimation="True"
+                           xct:TouchEffect.Command="{Binding OnCommentClickedCommand}">
                         <StackLayout VerticalOptions="Center"
                                          HorizontalOptions="Center">
                             <controls:CustomLabel Style="{StaticResource labelGenericMediumStyle}"
@@ -168,9 +169,98 @@
                                                       Text="Opinar"/>
                         </StackLayout>
                     </Frame>
+                    <BoxView Grid.Row="10"
+                             HeightRequest="1"
+                             BackgroundColor="{StaticResource grayColor}"/>
+                    <!--Comments view-->
+                    <StackLayout Grid.Row="11"
+                                 IsVisible="{Binding IsCommentsViewVisible}"
+                                 Margin="10,0">
+                        <controls:CustomLabel Text="Opiniones del producto"
+                                              Style="{StaticResource labelGenericMediumStyle}"/>
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="15">
+                            <controls:CustomLabel Style="{StaticResource labelGenericTitleStyle}"
+                                                  TextColor="{StaticResource primaryColor}"
+                                                  VerticalOptions="Center"
+                                                  Text="{Binding ProductQualification, StringFormat='{0:F1}'}"/>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="0"
+                                         VerticalOptions="Center">
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="0"
+                                             BindableLayout.ItemsSource="{Binding ProductRatingCollectionBar}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:CustomLabel Text="{Binding RatingIcon}"
+                                                                  TextColor="{Binding RatingColor}"
+                                                                  Style="{StaticResource ratingBarStyle}"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                                <controls:CustomLabel Style="{StaticResource labelGenericMicroStyle}">
+                                    <controls:CustomLabel.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding TotalQualifications}"/>
+                                            <Span Text=" Calificaciones"/>
+                                        </FormattedString>
+                                    </controls:CustomLabel.FormattedText>
+                                </controls:CustomLabel>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding IsCommentsViewVisible}"
+                                     Margin="10,20,10,0"
+                                     BindableLayout.ItemsSource="{Binding OnlyThreeCommentsCollection}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Vertical">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Orientation="Horizontal"
+                                                         Spacing="0"
+                                                         BindableLayout.ItemsSource="{Binding ValorationStarsCollection}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <controls:CustomLabel Text="{Binding RatingIcon}"
+                                                                              TextColor="{Binding RatingColor}"
+                                                                              Style="{StaticResource ratingBarStyle}"/>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                            <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                                                                  HorizontalOptions="EndAndExpand"
+                                                                  Text="{Binding CommentDate, StringFormat='{0:dd MMMM yyyy}'}"/>
+                                        </StackLayout>
+                                        <controls:CustomLabel Text="{Binding Description}"
+                                                              Style="{StaticResource labelGenericStyle}"/>
+                                        <BoxView HeightRequest="1"
+                                                 BackgroundColor="{StaticResource grayColor}"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame Grid.Row="12" 
+                           Margin="10,0,10,20" 
+                           Style="{StaticResource threeButtonStyle}" 
+                           IsVisible="{Binding IsCommentsViewVisible}"
+                           xct:TouchEffect.NativeAnimation="True">
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="15">
+                            <controls:CustomLabel Style="{StaticResource labelGenericSmallStyle}"
+                                                  VerticalOptions="Center"
+                                                   TextColor="{StaticResource primaryColor}"
+                                                  Text="Mostrar todas las opiniones"/>
+                            <controls:CustomLabel Style="{StaticResource iconLabel}"
+                                                  VerticalOptions="Center"
+                                                  FontSize="Title"
+                                                  TextColor="{StaticResource primaryColor}"
+                                                  HorizontalOptions="EndAndExpand"
+                                                  Text="{Static fonts:IconFont.ChevronRight}"/>
+                        </StackLayout>
+                    </Frame>
                 </Grid>
             </ScrollView>
-            <Grid Grid.Row="2"
+            <Grid Grid.Row="1"
                   RowSpacing="10"
                   RowDefinitions="Auto,Auto,Auto">
                 <BoxView Grid.Row="0"

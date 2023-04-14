@@ -10,6 +10,7 @@
             <Color x:Key="superLightGrayColor">#F3F3F3</Color>
             <Color x:Key="grayColor">#9A9999</Color>
 
+            
             <Style TargetType="Frame" x:Key="primaryProductImageStyle">
                 <Setter Property="HeightRequest" Value="230"/>
                 <Setter Property="Padding" Value="10"/>
@@ -84,21 +85,41 @@
                 <Setter Property="BorderColor" Value="{StaticResource primaryColor}"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource secondaryColor}"/>
             </Style>
+            <Style TargetType="Frame" x:Key="threeButtonStyle" BasedOn="{StaticResource auxButtonStyle}">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BorderColor" Value="{StaticResource primaryColor}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
             <Style TargetType="controls:CustomLabel" x:Key="labelGenericSmallStyle" >
                 <Setter Property="FontSize" Value="Small"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
-            <!-- Modificar para despues -->
-            <Style TargetType="Shell" x:Key="shellStyle">
-                <Setter Property="Shell.ForegroundColor" Value="Black"/>
-                <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericTitleStyle" >
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericMicroStyle" >
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="CollectionView" x:Key="cvRatingBar">
+                <Setter Property="WidthRequest" Value="130"/>
+                <Setter Property="HeightRequest" Value="25"/>
             </Style>
             <Style TargetType="Label" x:Key="iconLabel">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="FontFamily" Value="typicons"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <Style TargetType="Shell" x:Key="shellStyle">
+                <Setter Property="Shell.ForegroundColor" Value="Black"/>
+                <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

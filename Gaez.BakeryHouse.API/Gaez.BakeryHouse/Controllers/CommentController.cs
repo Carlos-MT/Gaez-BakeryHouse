@@ -26,6 +26,7 @@ namespace Gaez.BakeryHouse.Controllers
             returnInfo = commentService.PostComment(comment, clientId, productCode);
             return returnInfo;
         }
+
         [HttpGet("GetAllCommentsForProduct")]
         public IEnumerable<CommentModel> GetAllCommentsForProduct(int productCode)
         {
