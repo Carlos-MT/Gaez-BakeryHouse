@@ -121,6 +121,17 @@
                 <Setter Property="Shell.ForegroundColor" Value="Black"/>
                 <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
             </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="shellIconStyle" >
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" Value="typicons"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="shellLabelStyle" >
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

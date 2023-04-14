@@ -15,7 +15,7 @@ using Xamarin.Forms;
 namespace Gaez.BakeryHouse.ViewModels
 {
     [QueryProperty(nameof(ProductJson), nameof(ProductJson))]
-    public class ProductViewModel : BaseViewModel
+    public class ProductDetailViewModel : BaseViewModel
     {
         #region ATTRIBUTES
         private string _productJson;
@@ -71,7 +71,7 @@ namespace Gaez.BakeryHouse.ViewModels
         }
         #endregion
         #region CONSTRUCTOR
-        public ProductViewModel()
+        public ProductDetailViewModel()
         {
             _commentService = new CommentService();
             CommentsCollection = new ObservableCollection<CommentModel>();

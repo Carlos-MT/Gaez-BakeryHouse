@@ -102,7 +102,7 @@ namespace Gaez.BakeryHouse.ViewModels
 
             var model = JsonConvert.SerializeObject(p);
             var modelEncoded = HttpUtility.UrlEncode(model);
-            await Shell.Current.GoToAsync($"{nameof(ProductPage)}?{nameof(ProductViewModel.ProductJson)}={modelEncoded}");
+            await Shell.Current.GoToAsync($"{nameof(ProductDetailPage)}?{nameof(ProductDetailViewModel.ProductJson)}={modelEncoded}");
         });
         #endregion
     }

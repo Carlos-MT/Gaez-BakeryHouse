@@ -11,19 +11,19 @@ using Xamarin.Forms.Xaml;
 namespace Gaez.BakeryHouse.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : ContentPage
+    public partial class ProductDetailPage : ContentPage
     {
-        private HomeViewModel viewModel;
-        public HomePage()
+        private ProductDetailViewModel viewModel;
+        public ProductDetailPage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new HomeViewModel();
+            BindingContext = viewModel = new ProductDetailViewModel();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.LoadData();
+            await viewModel.LoadData();
         }
     }
 }
