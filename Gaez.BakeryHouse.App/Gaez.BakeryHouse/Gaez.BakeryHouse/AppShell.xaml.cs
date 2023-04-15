@@ -14,7 +14,7 @@ namespace Gaez.BakeryHouse
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ProductPage), typeof(ProductPage));
+            Routing.RegisterRoute(nameof(ProductDetailPage), typeof(ProductDetailPage));
         }
     }
 }

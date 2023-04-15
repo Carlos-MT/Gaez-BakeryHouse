@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Gaez.BakeryHouse.Views
+namespace Gaez.BakeryHouse.Views.ShellFlyoutPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProductPage : ContentPage
+    public partial class HomePage : ContentPage
     {
-        private ProductViewModel viewModel;
-        public ProductPage()
+        private HomeViewModel viewModel;
+        public HomePage()
         {
             InitializeComponent();
-            BindingContext = viewModel = new ProductViewModel();
+            BindingContext = viewModel = new HomeViewModel();
         }
 
         protected override void OnAppearing()

@@ -7,10 +7,10 @@
              xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
              xmlns:bh="clr-namespace:Gaez.BakeryHouse.Behaviors"
              x:Name="productPage"
-             x:Class="Gaez.BakeryHouse.Views.ProductPage">
+             x:Class="Gaez.BakeryHouse.Views.ProductDetailPage">
 
     <ContentPage.BindingContext>
-        <vm:ProductViewModel/>
+        <vm:ProductDetailViewModel/>
     </ContentPage.BindingContext>
     <RefreshView RefreshColor="{StaticResource primaryColor}"
                  IsRefreshing="{Binding IsRefreshVisible}"
