@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             x:Class="Gaez.BakeryHouse.Views.ProductDetailPageFolder.ProductCommentView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="controls:CustomLabel" x:Key="lblIconStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" Value="typicons"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="frBtnStyle">
+                <Setter Property="BorderColor" Value="{StaticResource primaryColor}"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <Grid Margin="10,20,10,0"
+          RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <controls:CustomLabel Grid.Row="0"
+                              Style="{StaticResource labelGenericMediumStyle}"
+                              Text="Opiniones del producto"/>
+        <StackLayout Grid.Row="1"
+                     Spacing="15"
+                     Orientation="Horizontal">
+            <controls:CustomLabel Text="{Binding ProductRating, StringFormat='{0:F1}'}"
+                                  VerticalOptions="CenterAndExpand"
+                                  TextColor="{StaticResource primaryColor}"
+                                  Style="{StaticResource labelGenericTitleStyle}"/>
+            <StackLayout Orientation="Vertical"
+                         Spacing="0">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0"
+                             BindableLayout.ItemsSource="{Binding ProductRatingBar}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <controls:CustomLabel Style="{StaticResource lblIconStyle}"
+                                                  Text="{Binding RatingIcon}"
+                                                  TextColor="{Binding RatingColor}"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                                      VerticalOptions="CenterAndExpand">
+                    <controls:CustomLabel.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding RatingCounter}"/>
+                            <Span Text=" calificaciones"/>
+                        </FormattedString>
+                    </controls:CustomLabel.FormattedText>
+                </controls:CustomLabel>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Row="2"
+                     BindableLayout.ItemsSource="{Binding OnlyThreeComments}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0"
+                                         BindableLayout.ItemsSource="{Binding ValorationStarsCollection}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:CustomLabel Text="{Binding RatingIcon}"
+                                                              TextColor="{Binding RatingColor}"
+                                                              Style="{StaticResource ratingBarStyle}"/>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                            <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                                                  HorizontalOptions="EndAndExpand"
+                                                  Text="{Binding CommentDate, StringFormat='{0:dd MMMM yyyy}'}"/>
+                        </StackLayout>
+                        <controls:CustomLabel Text="{Binding Description}"
+                                              Style="{StaticResource labelGenericStyle}"/>
+                        <BoxView Style="{StaticResource boxLineStyle}"/>
+                    </StackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+        <Frame Grid.Row="3"
+               Style="{StaticResource frBtnStyle}">
+            <StackLayout Orientation="Horizontal"
+                         Margin="10">
+                <controls:CustomLabel Text="Mostrar todas las opiniones"
+                                      TextColor="{StaticResource primaryColor}"
+                                      VerticalOptions="Center"
+                                      Style="{StaticResource labelGenericSmallStyle}"/>
+                <controls:CustomLabel Text="{Static fonts:IconFont.ChevronRight}"
+                                      HorizontalOptions="EndAndExpand"
+                                      TextColor="{StaticResource primaryColor}"
+                                      VerticalOptions="Center"
+                                      Style="{StaticResource lblIconStyle}"/>
+            </StackLayout>
+        </Frame>
+        <BoxView Grid.Row="4"
+                 Margin="-10,0"
+                 Style="{StaticResource boxLineStyle}"/>
+    </Grid>
+</ContentView>
