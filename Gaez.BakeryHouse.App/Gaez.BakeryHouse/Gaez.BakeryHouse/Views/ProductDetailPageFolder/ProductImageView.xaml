@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             x:Class="Gaez.BakeryHouse.Views.ProductDetailPageFolder.ProductImageView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="prdImgStyle">
+                <Setter Property="BackgroundColor" Value="{StaticResource superLightGrayColor}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="250"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+  <ContentView.Content>
+        <Frame Style="{StaticResource prdImgStyle}">
+            <controls:CustomLabel Margin="10"
+                                  VerticalOptions="End"
+                                  HorizontalOptions="Start"
+                                  Style="{StaticResource labelGenericTitleStyle}">
+                <controls:CustomLabel.FormattedText>
+                    <FormattedString>
+                        <Span Text="$ "/>
+                        <Span Text="{Binding Product.RegularPrice}"/>
+                    </FormattedString>
+                </controls:CustomLabel.FormattedText>
+            </controls:CustomLabel>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

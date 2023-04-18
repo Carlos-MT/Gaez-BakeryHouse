@@ -1,4 +1,6 @@
-﻿using Gaez.BakeryHouse.Views;
+﻿using Gaez.BakeryHouse.Fonts;
+using Gaez.BakeryHouse.Models;
+using Gaez.BakeryHouse.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

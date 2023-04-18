@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             x:Class="Gaez.BakeryHouse.Views.ProductDetailPageFolder.LeaveCommentView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="fEditorStyle">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="BorderColor" Value="{StaticResource grayColor}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="lblIconStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" Value="typicons"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <Grid Margin="10,20,10,0"
+          RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="0" 
+                     Orientation="Horizontal">
+            <controls:CustomLabel Style="{StaticResource labelGenericMediumStyle}"
+                                  Text="Dejanos tu opinión"/>
+            <StackLayout Orientation="Horizontal"
+                         Spacing="0"
+                         HorizontalOptions="EndAndExpand"
+                         BindableLayout.ItemsSource="{Binding RatingBar}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CustomLabel Text="{Binding RatingIcon}"
+                                              Style="{StaticResource lblIconStyle}"
+                                              TextColor="{Binding RatingColor}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </StackLayout>
+        <Frame Grid.Row="1"
+               Style="{StaticResource fEditorStyle}">
+            <controls:CustomEditor Margin="10,5"
+                                   Placeholder="Escribe tu opinión....."/>
+        </Frame>
+        <Button Grid.Row="2"
+                BackgroundColor="{StaticResource primaryColor}"
+                Text="Opinar"
+                Style="{StaticResource btnStyle}"/>
+        <BoxView Grid.Row="3"
+                 Margin="-10,0"
+                 Style="{StaticResource boxLineStyle}"/>
+    </Grid>
+</ContentView>

@@ -12,15 +12,10 @@ namespace Gaez.BakeryHouse.ViewModels
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         #region ATTRIBUTES
-        private bool isContentViewVisible;
-        private bool isRefreshVisible;
-        private bool isScrollEnable;
-        private bool isSearchViewVisible;
-        private bool isSearchEnable;
-        private bool isButtonEnabled;
-        private bool isRefreshEnable;
-        private bool isCommentsViewVisible;
-        private string inputText;
+        private bool isContentViewVisible; // Indica si mostrar o no el contenido de una pagina
+        private bool isRefreshingVisible; // Indica si mostrar o no el RefreshView
+        private string queryText; // Propiedad de Texto a buscar
+        private string title; // Indica el itulo de la pagina
         #endregion
         #region PROPERTIES
         public bool IsContentViewVisible
@@ -28,45 +23,20 @@ namespace Gaez.BakeryHouse.ViewModels
             get { return isContentViewVisible; }
             set { isContentViewVisible = value; OnPropertyChanged(); }
         }
-        public bool IsRefreshVisible
+        public bool IsRefreshingVisible
         {
-            get { return isRefreshVisible; }
-            set { isRefreshVisible = value; OnPropertyChanged(); }
+            get { return isRefreshingVisible; }
+            set { isRefreshingVisible = value; OnPropertyChanged(); }
         }
-        public bool IsScrollEnable
+        public string QueryText
         {
-            get { return isScrollEnable; }
-            set { isScrollEnable = value; OnPropertyChanged(); }
+            get { return queryText; }
+            set { queryText = value; OnPropertyChanged(); }
         }
-        public bool IsSearchViewVisible
+        public string Title
         {
-            get { return isSearchViewVisible; }
-            set { isSearchViewVisible = value; OnPropertyChanged(); }
-        }
-        public bool IsButtonEnabled
-        {
-            get { return isButtonEnabled; }
-            set { isButtonEnabled = value; OnPropertyChanged(); }
-        }
-        public string InputText
-        {
-            get { return inputText; }
-            set { inputText = value; OnPropertyChanged(); }
-        }
-        public bool IsRefreshEnable
-        {
-            get { return isRefreshEnable; }
-            set { isRefreshEnable = value; OnPropertyChanged(); }
-        }
-        public bool IsSearchEnable
-        {
-            get { return isSearchEnable; }
-            set { isSearchEnable = value; OnPropertyChanged(); }
-        }
-        public bool IsCommentsViewVisible
-        {
-            get { return isCommentsViewVisible; }
-            set { isCommentsViewVisible = value; OnPropertyChanged(); }
+            get { return title; }
+            set {  title = value; OnPropertyChanged(); }  
         }
         #endregion
         #region METHODS
@@ -80,16 +50,9 @@ namespace Gaez.BakeryHouse.ViewModels
         }
         protected void OnAppering()
         {
-            // Al aparecer la pagina
-            IsRefreshVisible = true; // Muetra el RefreshView
-            IsScrollEnable = true; // Habilita el Scroll
-            IsContentViewVisible = false; // Oculta el contenido de la pagina
-            IsSearchViewVisible = false; // Oculta la pagina de busqueda
-            InputText = ""; // Texto de busqueda vacio
-            IsRefreshEnable = true; // Refresh habilitado
-            IsSearchEnable = false; // Deshabilitar el SearchBar
-            IsCommentsViewVisible = false; // Oculta la pagina de comentarios
-            IsButtonEnabled = true; // Habilitar los botones
+            IsRefreshingVisible = false; // Al cargar cualquier pagina, no muestres el RefrehView
+            IsContentViewVisible = false; // Al cargar cualquier pagina, no muestres su contenido
+            QueryText = string.Empty; // Texto vacio al cargar cualquier pagina
         }
         #endregion
         public event PropertyChangedEventHandler PropertyChanged;     
