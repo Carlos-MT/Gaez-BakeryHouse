@@ -13,13 +13,12 @@
 
     <Shell.SearchHandler>
         <handlers:ProductSearchHandler ShowsResults="True"
-                                       BackgroundColor="{StaticResource secondaryColor}"
                                        ItemTemplate="{StaticResource productsTemplate}"/>
     </Shell.SearchHandler>
 
-    <RefreshView Command="{Binding OnRefreshCommand}"
-                 IsRefreshing="{Binding IsRefreshingVisible}"
-                 RefreshColor="{StaticResource primaryColor}">
+    <RefreshView Command="{Binding OnRefreshPageCommand}"
+                 RefreshColor="{StaticResource primaryColor}"
+                 IsRefreshing="{Binding IsRefreshing}">
         <ScrollView HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
             <Grid Grid.Row="0"

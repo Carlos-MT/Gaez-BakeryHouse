@@ -17,5 +17,8 @@ namespace Gaez.BakeryHouse.Interfaces
 
         [Get("/Product/GetProductsFromHigherToLowerPrice")]
         Task<IEnumerable<ProductModel>> GetProductsFromHigherToLowerPrice(int categoryId);
+
+        [Get("/Product/GetProductsByCategory")]
+        Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId);
     }
 }

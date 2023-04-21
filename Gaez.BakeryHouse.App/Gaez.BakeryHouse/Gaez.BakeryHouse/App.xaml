@@ -26,14 +26,6 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="Title"/>
             </Style>
-            <Style TargetType="Frame" x:Key="frameEditorStyle">
-                <Setter Property="HeightRequest" Value="100"/>
-                <Setter Property="Padding" Value="10,0"/>
-                <Setter Property="HasShadow" Value="False"/>
-                <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="BorderColor" Value="{StaticResource grayColor}"/>
-            </Style>
             <Style TargetType="controls:CustomLabel" x:Key="labelGenericSmallStyle" >
                 <Setter Property="FontSize" Value="Small"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
@@ -60,10 +52,10 @@
                 <Setter Property="TextTransform" Value="None"/>
                 <Setter Property="FontSize" Value="Medium"/>
             </Style>
-            
+
             <!-- shell style -->
             <Style TargetType="Shell" x:Key="shellStyle">
-                <Setter Property="Shell.ForegroundColor" Value="White"/>
+                <Setter Property="Shell.ForegroundColor" Value="Black"/>
                 <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
             </Style>
             <Style TargetType="controls:CustomLabel" x:Key="shellIconStyle" >
@@ -80,13 +72,14 @@
             <DataTemplate x:Key="productsTemplate">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <controls:CustomLabel Grid.Row="0" 
                                           Text="{Binding ProductName}"
                                           TextTransform="Lowercase"
                                           Margin="10"
-                                          VerticalOptions="CenterAndExpand"
+                                          VerticalOptions="Center"
+                                          LineBreakMode="MiddleTruncation"
                                           Style="{StaticResource labelGenericStyle}"/>
                 </Grid>
             </DataTemplate>

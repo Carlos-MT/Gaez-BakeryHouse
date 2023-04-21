@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.API.Models;
 using Gaez.BakeryHouse.Fonts;
 using Gaez.BakeryHouse.Interfaces;
 using Gaez.BakeryHouse.Models;
@@ -19,7 +18,7 @@ namespace Gaez.BakeryHouse.ViewModels
     [QueryProperty(nameof(ProductJson), nameof(ProductJson))]
     public class ProductDetailViewModel : BaseViewModel
     {
-        #region ATTRIBUTES
+        #region ATRIBUTES
         private string productJson;
         private ProductModel product;
         private ObservableCollection<RatingModel> ratingBar;
@@ -75,7 +74,7 @@ namespace Gaez.BakeryHouse.ViewModels
         #region CONSTRUCTOR
         public ProductDetailViewModel()
         {
-            Title = "Detalles del producto";
+            Title = "Producto";
             commentService = new CommentService();
             Comments = new ObservableCollection<CommentModel>();
         }
@@ -83,7 +82,6 @@ namespace Gaez.BakeryHouse.ViewModels
         #region METHODS
         public async Task LoadData()
         {
-            UserDialogs.Instance.ShowLoading("Cargando");
             base.OnAppering();
             CreateRatingBar();
 
@@ -104,7 +102,7 @@ namespace Gaez.BakeryHouse.ViewModels
 
             // Si todo sale bien
             IsContentViewVisible = true; // Muestra el contenido de la pagina
-            UserDialogs.Instance.HideLoading();
+            IsRefreshing = false; // Oculta el RefreshView
         }
         private void LoadValorationStarsCollection()
         {
@@ -122,7 +120,7 @@ namespace Gaez.BakeryHouse.ViewModels
                     Comments[i].ValorationStarsCollection.Add(new RatingModel()
                     {
                         RatingIcon = IconFont.StarOutline,
-                        RatingColor = Color.FromHex("#9A9999"),
+                        RatingColor = Color.FromHex("#FF6A0E"),
                         IsRatingPressed = false,
                     });
                 }
@@ -131,7 +129,7 @@ namespace Gaez.BakeryHouse.ViewModels
                 for (int k = 0; k < Comments[i].Valoration; k++)
                 {
                     Comments[i].ValorationStarsCollection[k].RatingIcon = IconFont.StarFullOutline;
-                    Comments[i].ValorationStarsCollection[k].RatingColor = Color.Yellow;
+                    Comments[i].ValorationStarsCollection[k].RatingColor = Color.FromHex("#FF6A0E");
                     Comments[i].ValorationStarsCollection[k].IsRatingPressed = true;
                 }
 
@@ -163,7 +161,7 @@ namespace Gaez.BakeryHouse.ViewModels
                 ProductRatingBar.Add(new RatingModel()
                 {
                     RatingIcon = IconFont.StarOutline,
-                    RatingColor = Color.FromHex("#9A9999"),
+                    RatingColor = Color.FromHex("#FF6A0E"),
                     IsRatingPressed = false,
                     RatingId = i
                 });
@@ -173,7 +171,7 @@ namespace Gaez.BakeryHouse.ViewModels
             for (int i = 0; i < (int)ProductRating; i++)
             {
                 ProductRatingBar[i].RatingIcon = IconFont.StarFullOutline;
-                ProductRatingBar[i].RatingColor = Color.Yellow;
+                ProductRatingBar[i].RatingColor = Color.FromHex("#FF6A0E");
                 ProductRatingBar[i].IsRatingPressed = true;
             }
         }
@@ -186,7 +184,7 @@ namespace Gaez.BakeryHouse.ViewModels
                 RatingBar.Add(new RatingModel()
                 {
                     RatingIcon = IconFont.StarOutline,
-                    RatingColor = Color.FromHex("#9A9999"),
+                    RatingColor = Color.FromHex("#FF6A0E"),
                     IsRatingPressed = false,
                     RatingId = i
                 });

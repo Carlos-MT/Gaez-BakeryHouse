@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.API.Models;
 using Gaez.BakeryHouse.Data;
 using Gaez.BakeryHouse.Services;
 using Gaez.BakeryHouse.Views;
@@ -19,7 +18,7 @@ namespace Gaez.BakeryHouse.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        #region ATTRIBUTES
+        #region ATRIBUTES
         #endregion
         #region PROPERTIES
         #endregion
@@ -31,22 +30,24 @@ namespace Gaez.BakeryHouse.ViewModels
         #region METHODS
         public async Task LoadData()
         {
-            UserDialogs.Instance.ShowLoading("Cargando");
             base.OnAppering();
 
             try
             {
                 await ProductData.LoadData();
             }
-            catch(Exception ex) { throw; }
+            catch(Exception ex)
+            {
+                throw;
+            }
 
             // Si todo sale bien
             IsContentViewVisible = true; // Muestra el contenido de la pagina
-            UserDialogs.Instance.HideLoading();
+            IsRefreshing = false;
         }
         #endregion
         #region COMMANDS
-        public ICommand OnRefreshCommand => new Command(async () => await LoadData());
+        public ICommand OnRefreshPageCommand => new Command(async () => await LoadData());
         #endregion
     }
 }

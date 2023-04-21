@@ -29,6 +29,7 @@ namespace Gaez.BakeryHouse.Domain.Services
             try
             {
                 var query = from t1 in categoriesRepo.GetAll()
+                            orderby t1.CategoryName ascending
                             select new CategoryModel()
                             {
                                 CategoryId = t1.CategoryId,

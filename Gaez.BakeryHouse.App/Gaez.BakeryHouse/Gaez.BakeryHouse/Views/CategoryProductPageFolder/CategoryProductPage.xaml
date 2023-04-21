@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
+             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.CategoryProductPageFolder"
+             x:Class="Gaez.BakeryHouse.Views.CategoryProductPage">
+
+    <Shell.TitleView>
+        <Grid>
+            <controls:CustomLabel Text="{Binding Title}"
+                                  FontAttributes="None"
+                                  Style="{StaticResource labelGenericMediumStyle}"
+                                  VerticalOptions="CenterAndExpand"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.BindingContext>
+        <vm:CategoryProductViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="controls:CustomLabel" x:Key="lblIconStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontFamily" Value="typicons"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <RefreshView Command="{Binding OnRefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 RefreshColor="{StaticResource primaryColor}">
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <views:HeaderView Grid.Row="0"/>
+            
+        </Grid>
+    </RefreshView>
+</ContentPage>

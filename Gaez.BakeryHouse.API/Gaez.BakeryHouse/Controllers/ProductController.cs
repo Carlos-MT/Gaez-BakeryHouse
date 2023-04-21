@@ -50,6 +50,17 @@ namespace Gaez.BakeryHouse.Controllers
             }
             catch (Exception ex) { throw; }
         }
+
+        [HttpGet("GetProductsByCategory")]
+        public IEnumerable<ProductModel> GetProductsByCategory(int categoryId)
+        {
+            try
+            {
+                var response = productService.GetProductsByCategory(categoryId);
+                return response;
+            }
+            catch (Exception ex) { throw; }
+        }
         #endregion
     }
 }

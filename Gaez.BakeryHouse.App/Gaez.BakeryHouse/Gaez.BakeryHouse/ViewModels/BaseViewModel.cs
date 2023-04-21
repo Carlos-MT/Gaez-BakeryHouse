@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,9 +14,10 @@ namespace Gaez.BakeryHouse.ViewModels
     {
         #region ATTRIBUTES
         private bool isContentViewVisible; // Indica si mostrar o no el contenido de una pagina
-        private bool isRefreshingVisible; // Indica si mostrar o no el RefreshView
-        private string queryText; // Propiedad de Texto a buscar
+        private bool isRefreshing; // Indica si mostrar o no el RefreshView
         private string title; // Indica el itulo de la pagina
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region PROPERTIES
         public bool IsContentViewVisible
@@ -23,15 +25,10 @@ namespace Gaez.BakeryHouse.ViewModels
             get { return isContentViewVisible; }
             set { isContentViewVisible = value; OnPropertyChanged(); }
         }
-        public bool IsRefreshingVisible
+        public bool IsRefreshing
         {
-            get { return isRefreshingVisible; }
-            set { isRefreshingVisible = value; OnPropertyChanged(); }
-        }
-        public string QueryText
-        {
-            get { return queryText; }
-            set { queryText = value; OnPropertyChanged(); }
+            get { return isRefreshing; }
+            set { isRefreshing = value; OnPropertyChanged(); }
         }
         public string Title
         {
@@ -50,11 +47,9 @@ namespace Gaez.BakeryHouse.ViewModels
         }
         protected void OnAppering()
         {
-            IsRefreshingVisible = false; // Al cargar cualquier pagina, no muestres el RefrehView
+            IsRefreshing = true; // Al cargar cualquier pagina, no muestres el RefrehView
             IsContentViewVisible = false; // Al cargar cualquier pagina, no muestres su contenido
-            QueryText = string.Empty; // Texto vacio al cargar cualquier pagina
         }
         #endregion
-        public event PropertyChangedEventHandler PropertyChanged;     
     }
 }
