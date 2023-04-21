@@ -2,17 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
              xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.ProductDetailPageFolder"
-             x:Name="self"
-             Title="{Binding Title}"
              x:Class="Gaez.BakeryHouse.Views.ProductDetailPage">
 
     <ContentPage.BindingContext>
         <vm:ProductDetailViewModel/>
     </ContentPage.BindingContext>
-    
+
+    <Shell.TitleView>
+        <Grid>
+            <controls:CustomLabel Text="{Binding Title}"
+                                  FontAttributes="None"
+                                  Style="{StaticResource labelGenericMediumStyle}"
+                                  VerticalOptions="CenterAndExpand"/>
+        </Grid>
+    </Shell.TitleView>
+
     <RefreshView RefreshColor="{StaticResource primaryColor}"
-                 IsRefreshing="{Binding IsRefreshingVisible}"
+                 IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding OnRefreshCommand}">
         <ScrollView HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">

@@ -41,6 +41,16 @@ namespace Gaez.BakeryHouse.Services
             }
             catch (Exception ex) { throw; }
         }
+        public async Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId)
+        {
+            try
+            {
+                var apiResponse = RestService.For<IProductService>(httpClient);
+                var response = await apiResponse.GetProductsByCategory(categoryId);
+                return response;
+            }
+            catch(Exception e) { throw; }
+        }
         #endregion
     }
 }

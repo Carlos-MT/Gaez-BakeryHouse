@@ -1,5 +1,4 @@
-﻿using Gaez.BakeryHouse.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Gaez.BakeryHouse.Views.SpecialViewsFolder
+namespace Gaez.BakeryHouse.Views.CategoryProductPageFolder
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ActivityIndicatorView : ContentView
+    public partial class HeaderView : ContentView
     {
-        public ActivityIndicatorView()
+        public HeaderView()
         {
             InitializeComponent();
         }

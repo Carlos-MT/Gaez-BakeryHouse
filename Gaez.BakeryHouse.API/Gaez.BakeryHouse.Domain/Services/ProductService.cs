@@ -101,6 +101,28 @@ namespace Gaez.BakeryHouse.Domain.Services
             }
             catch (Exception ex) { throw; }
         }
+        public IEnumerable<ProductModel> GetProductsByCategory(int categoryId)
+        {
+            try
+            {
+                var query = from t1 in productsRepo.GetAll()
+                            join t2 in pbtCategoryRepo.GetAll()
+                            on t1.ProductCode equals t2.ProductCode
+                            where t2.CategoryId == categoryId
+                            select new ProductModel()
+                            {
+                                ProductCode = t1.ProductCode,
+                                ProductName = t1.ProductName,
+                                RegularPrice = t1.RegularPrice,
+                                Valuation = t1.Valuation,
+                                Application = t1.Application,
+                                Description = t1.Description
+                            };
+
+                return query;
+            }
+            catch(Exception ex) { throw; }
+        }
         #endregion
     }
 }
