@@ -1,11 +1,13 @@
 ﻿using Gaez.BakeryHouse.API.Models;
 using Gaez.BakeryHouse.Services;
+using Gaez.BakeryHouse.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -59,7 +61,8 @@ namespace Gaez.BakeryHouse.ViewModels
             }
             catch(Exception ex)
             {
-                throw;
+                IsContentViewVisible = false;
+                IsRefreshing = false;
             }
 
             // Si todo sale bien
@@ -75,6 +78,12 @@ namespace Gaez.BakeryHouse.ViewModels
         #endregion
         #region COMMANDS
         public ICommand OnRefreshCommand => new Command(async () => await LoadData());
+        public ICommand OnProductClickedCommand => new Command<ProductModel>(async (item) =>
+        {
+            var model = JsonConvert.SerializeObject((ProductModel)item);
+            var modelEncoded = HttpUtility.UrlEncode(model);
+            await Shell.Current.GoToAsync($"{nameof(ProductDetailPage)}?{nameof(ProductDetailViewModel.ProductJson)}={modelEncoded}");
+        });
         #endregion
     }
 }

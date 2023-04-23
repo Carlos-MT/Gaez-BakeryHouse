@@ -31,16 +31,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <RefreshView Command="{Binding OnRefreshCommand}"
-                 IsRefreshing="{Binding IsRefreshing}"
-                 RefreshColor="{StaticResource primaryColor}">
-        <Grid RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <views:HeaderView Grid.Row="0"/>
-            
-        </Grid>
-    </RefreshView>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <views:HeaderView Grid.Row="0"/>
+        <views:CollectionProductView Grid.Row="1"/>
+    </Grid>
 </ContentPage>

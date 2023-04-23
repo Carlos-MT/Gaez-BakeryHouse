@@ -1,0 +1,74 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Gaez.BakeryHouse.App"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.App.Controls"
+             x:Class="Gaez.BakeryHouse.App.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- colors -->
+            <Color x:Key="primaryColor">#ff6a0e</Color>
+            <Color x:Key="secondaryColor">#FFDAC3</Color>
+            <Color x:Key="lightGrayColor">#F3F3F3</Color>
+            <Color x:Key="grayColor">#9A9999</Color>
+            
+            <!-- others -->
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericStyle" >
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericMediumStyle">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="ratingBarStyle">
+                <Setter Property="FontFamily" Value="typicons"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Title"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericSmallStyle" >
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericTitleStyle" >
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="labelGenericMicroStyle" >
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="BoxView" x:Key="boxLineStyle">
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Color" Value="{StaticResource grayColor}"/>
+            </Style>
+            <Style TargetType="Button" x:Key="btnStyle">
+                <Setter Property="HeightRequest" Value="55"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="TextTransform" Value="None"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+
+            <!-- Shell -->
+            <Style TargetType="Shell" x:Key="shellStyle">
+                <Setter Property="Shell.ForegroundColor" Value="Black"/>
+                <Setter Property="Shell.BackgroundColor" Value="{x:StaticResource primaryColor}"/>
+            </Style>
+            <Style TargetType="controls:CustomLabel" x:Key="iconStyle" >
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="FontFamily" Value="typicons"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

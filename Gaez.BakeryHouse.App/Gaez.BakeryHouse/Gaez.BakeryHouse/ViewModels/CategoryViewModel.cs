@@ -44,7 +44,11 @@ namespace Gaez.BakeryHouse.ViewModels
                 Categories.Clear();
                 Categories = Convert<CategoryModel>(await categoryService.GetAllCategories());
             }
-            catch (Exception ex) { throw; }
+            catch (Exception ex)
+            {
+                IsContentViewVisible = false;
+                IsRefreshing = false;
+            }
 
             // Si todo sale bien
             IsContentViewVisible = true; // Muestra el contenido de la pagina

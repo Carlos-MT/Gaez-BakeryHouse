@@ -38,7 +38,8 @@ namespace Gaez.BakeryHouse.ViewModels
             }
             catch(Exception ex)
             {
-                throw;
+                IsContentViewVisible = false;
+                IsRefreshing = false;
             }
 
             // Si todo sale bien
