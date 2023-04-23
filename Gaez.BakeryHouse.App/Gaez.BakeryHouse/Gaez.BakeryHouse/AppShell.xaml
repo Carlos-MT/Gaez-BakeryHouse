@@ -1,6 +1,281 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Gaez.BakeryHouse.AppShell">
-    
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Gaez.BakeryHouse.Views"
+       xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+       Shell.BackgroundColor="{StaticResource primaryColor}"
+       Shell.ForegroundColor="Black"
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       x:Class="Gaez.BakeryHouse.AppShell">
+
+    <Shell.FlyoutHeader>
+        <views:CustomFlyoutHeaderView/>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Inicio">
+        <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.HomeOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Buscar">
+        <ShellContent ContentTemplate="{DataTemplate views:SearchPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ZoomOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Notificaciones">
+        <ShellContent ContentTemplate="{DataTemplate views:NotificationPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.Bell}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Pedidos">
+        <ShellContent ContentTemplate="{DataTemplate views:OrderPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ShoppingBag}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Favoritos">
+        <ShellContent ContentTemplate="{DataTemplate views:FavoritePage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.HeartOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Mi carrito">
+        <ShellContent ContentTemplate="{DataTemplate views:MyShoppingCartPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ShoppingCart}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Categorías">
+        <ShellContent ContentTemplate="{DataTemplate views:CategoryPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ThListOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Más vendidos">
+        <ShellContent ContentTemplate="{DataTemplate views:BestSellerPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.StarOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Ofertas">
+        <ShellContent ContentTemplate="{DataTemplate views:OffertPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.Tags}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Cuenta">
+        <ShellContent ContentTemplate="{DataTemplate views:AccountPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50,1">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.UserOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                    <BoxView Grid.Row="1"
+                             Style="{StaticResource boxStyle}"/>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Ayuda">
+        <ShellContent ContentTemplate="{DataTemplate views:HelpPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.InfoOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Acerca de">
+        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.InfoLargeOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
 </Shell>
