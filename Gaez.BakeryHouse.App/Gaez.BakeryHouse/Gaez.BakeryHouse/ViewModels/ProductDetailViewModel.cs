@@ -98,7 +98,11 @@ namespace Gaez.BakeryHouse.ViewModels
                 CalculateProductRating();
                 CreateProductRatingBar();
             }
-            catch(Exception ex) { throw; }
+            catch(Exception ex)
+            {
+                IsContentViewVisible = false;
+                IsRefreshing = false; 
+            }
 
             // Si todo sale bien
             IsContentViewVisible = true; // Muestra el contenido de la pagina
