@@ -7,6 +7,5 @@ namespace Gaez.BakeryHouse.Controls
 {
     public class CustomEditor : Editor
     {
-        public int MyProperty { get; set; }
     }
 }
