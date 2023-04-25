@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Gaez.BakeryHouse.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : ContentPage
+	public partial class ProductDetailPage : ContentPage
 	{
-		private HomeViewModel viewModel;
-		public HomePage ()
+		ProductDetailViewModel viewModel;
+		public ProductDetailPage ()
 		{
 			InitializeComponent ();
-			BindingContext = viewModel = new HomeViewModel();
+			BindingContext = viewModel = new ProductDetailViewModel();
 		}
 
         protected override async void OnAppearing()

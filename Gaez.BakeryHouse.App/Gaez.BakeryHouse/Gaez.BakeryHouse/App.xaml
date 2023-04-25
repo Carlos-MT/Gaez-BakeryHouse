@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
              xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:ratingbar="clr-namespace:RatingBarControl;assembly=RatingBarControl"
              x:Class="Gaez.BakeryHouse.App">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="primaryColor">#ff6a0e</Color>
             <Color x:Key="secondaryColor">#FFDAC3</Color>
-            <Color x:Key="superLightGrayColor">#F3F3F3</Color>
+            <Color x:Key="lightGrayColor">#F3F3F3</Color>
             <Color x:Key="grayColor">#9A9999</Color>
+            <Color x:Key="starColor">#FFDF00</Color>
 
             <Style TargetType="Grid" x:Key="gridDataTemplateStyle">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -30,6 +32,24 @@
                 <Setter Property="FontSize" Value="Small"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
+            <Style TargetType="Label" x:Key="lblMicroStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="Label" x:Key="lblMediumStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="Label" x:Key="lblNormalStyle">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style TargetType="Label" x:Key="lblTitleStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
             <Style TargetType="BoxView" x:Key="boxStyle">
                 <Setter Property="Color" Value="{StaticResource grayColor}"/>
                 <Setter Property="HeightRequest" Value="1"/>
@@ -39,6 +59,31 @@
                 <Setter Property="FontSize" Value="Title"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
+            <Style TargetType="Button" x:Key="btnStyle">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="TextTransform" Value="None"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <Style TargetType="ratingbar:RatingBar" x:Key="ratingStyle">
+                <Setter Property="FillStarImage" Value="fillstar"/>
+                <Setter Property="EmptyStarImage" Value="emptystar"/>
+                <Setter Property="StarWidthRequest" Value="20"/>
+                <Setter Property="StarHeightRequest" Value="20"/>
+                <Setter Property="SelectedStarValue" Value="5"/>
+            </Style>
+            <DataTemplate x:Key="searchTemplate">
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <Label Text="{Binding ProductName}"
+                           TextColor="Black"
+                           TextTransform="Lowercase"
+                           Margin="10,0"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

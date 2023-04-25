@@ -4,7 +4,7 @@
        xmlns:views="clr-namespace:Gaez.BakeryHouse.Views"
        xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
        Shell.BackgroundColor="{StaticResource primaryColor}"
-       Shell.ForegroundColor="Black"
+       Shell.ForegroundColor="White"
        FlyoutHeaderBehavior="CollapseOnScroll"
        x:Class="Gaez.BakeryHouse.AppShell">
 
