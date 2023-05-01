@@ -1,22 +1,14 @@
-﻿using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.Models;
 using Refit;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Gaez.BakeryHouse.Interfaces
+namespace Gaez.BakeryHouse.interfaces
 {
     public interface IProductService
     {
         [Get("/Product/GetAllProducts")]
         Task<IEnumerable<ProductModel>> GetAllProducts();
-
-        [Get("/Product/GetProductsFromLowerToHigherPrice")]
-        Task<IEnumerable<ProductModel>> GetProductsFromLowerToHigherPrice(int categoryId);
-
-        [Get("/Product/GetProductsFromHigherToLowerPrice")]
-        Task<IEnumerable<ProductModel>> GetProductsFromHigherToLowerPrice(int categoryId);
 
         [Get("/Product/GetProductsByCategory")]
         Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId);

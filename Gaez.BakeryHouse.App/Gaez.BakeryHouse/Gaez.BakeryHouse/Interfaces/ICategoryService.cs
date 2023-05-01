@@ -1,4 +1,4 @@
-﻿using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.Models;
 using Refit;
 using System;
 using System.Collections.Generic;

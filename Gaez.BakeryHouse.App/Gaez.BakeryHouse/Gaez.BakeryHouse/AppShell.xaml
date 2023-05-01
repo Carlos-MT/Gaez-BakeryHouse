@@ -1,40 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
        xmlns:views="clr-namespace:Gaez.BakeryHouse.Views"
        xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
-       Style="{StaticResource shellStyle}"
+       Shell.BackgroundColor="{StaticResource primaryColor}"
+       Shell.ForegroundColor="White"
+       FlyoutHeaderBehavior="CollapseOnScroll"
        x:Class="Gaez.BakeryHouse.AppShell">
 
     <Shell.FlyoutHeader>
-        <views:CustomFlyoutHeaderPage/>
+        <views:CustomFlyoutHeaderView/>
     </Shell.FlyoutHeader>
+
     <FlyoutItem Title="Inicio">
         <ShellContent ContentTemplate="{DataTemplate views:HomePage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.HomeOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.HomeOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -44,27 +38,19 @@
         <ShellContent ContentTemplate="{DataTemplate views:SearchPage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.ZoomOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ZoomOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -74,27 +60,19 @@
         <ShellContent ContentTemplate="{DataTemplate views:NotificationPage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.Bell}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.Bell}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -104,27 +82,19 @@
         <ShellContent ContentTemplate="{DataTemplate views:OrderPage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.Clipboard}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ShoppingBag}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -134,117 +104,41 @@
         <ShellContent ContentTemplate="{DataTemplate views:FavoritePage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.HeartOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.HeartOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
     </FlyoutItem>
     <FlyoutItem Title="Mi carrito">
-        <ShellContent ContentTemplate="{DataTemplate views:MyShoppingCarPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate views:MyShoppingCartPage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.ShoppingCart}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
-                    </StackLayout>
-                </Grid>
-            </DataTemplate>
-        </Shell.ItemTemplate>
-    </FlyoutItem>
-    <FlyoutItem Title="Ofertas">
-        <ShellContent ContentTemplate="{DataTemplate views:OffertPage}"/>
-        <Shell.ItemTemplate>
-            <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
-                                 Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.Tag}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
-                    </StackLayout>
-                </Grid>
-            </DataTemplate>
-        </Shell.ItemTemplate>
-    </FlyoutItem>
-    <FlyoutItem Title="Cuenta">
-        <ShellContent ContentTemplate="{DataTemplate views:AccountPage}"/>
-        <Shell.ItemTemplate>
-            <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
-                                 Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.UserOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ShoppingCart}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -254,27 +148,19 @@
         <ShellContent ContentTemplate="{DataTemplate views:CategoryPage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.ThListOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.ThListOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -284,91 +170,112 @@
         <ShellContent ContentTemplate="{DataTemplate views:BestSellerPage}"/>
         <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50, Auto">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.StarOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.StarOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
-                    <BoxView HeightRequest="1"
-                             Grid.Row="1"
-                             Color="{StaticResource grayColor}"/>
                 </Grid>
             </DataTemplate>
         </Shell.ItemTemplate>
     </FlyoutItem>
-    <MenuItem Text="Ayuda">
-        <Shell.MenuItemTemplate>
+    <FlyoutItem Title="Ofertas">
+        <ShellContent ContentTemplate="{DataTemplate views:OffertPage}"/>
+        <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.InfoOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.Tags}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
-        </Shell.MenuItemTemplate>
-    </MenuItem>
-    <MenuItem Text="Acerca de">
-        <Shell.MenuItemTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Cuenta">
+        <ShellContent ContentTemplate="{DataTemplate views:AccountPage}"/>
+        <Shell.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor"
-                                    Value="{x:OnPlatform Android=#F2F2F2, iOS=#F2F2F2}" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                    <StackLayout Margin="10" 
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50,1">
+                    <StackLayout Grid.Row="0"
                                  Orientation="Horizontal"
-                                 Spacing="20">
-                        <controls:CustomLabel Style="{StaticResource shellIconStyle}"
-                                              Text="{Static fonts:IconFont.InfoLargeOutline}"/>
-                        <controls:CustomLabel Style="{StaticResource shellLabelStyle}"
-                                              Text="{Binding Title}"/>
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.UserOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                    <BoxView Grid.Row="1"
+                             Style="{StaticResource boxStyle}"/>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Ayuda">
+        <ShellContent ContentTemplate="{DataTemplate views:HelpPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.InfoOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
-        </Shell.MenuItemTemplate>
-    </MenuItem>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
+    <FlyoutItem Title="Acerca de">
+        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}"/>
+        <Shell.ItemTemplate>
+            <DataTemplate>
+                <Grid Style="{StaticResource gridDataTemplateStyle}"
+                      RowDefinitions="50">
+                    <StackLayout Grid.Row="0"
+                                 Orientation="Horizontal"
+                                 Spacing="20"
+                                 Margin="10,0">
+                        <Label Text="{Static fonts:IconFont.InfoLargeOutline}"
+                               VerticalOptions="Center"
+                               Style="{StaticResource lblIconStyle}"/>
+                        <Label Text="{Binding Title}"
+                               VerticalOptions="Center"
+                               FontAttributes="None"
+                               Style="{StaticResource lblSmallStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </Shell.ItemTemplate>
+    </FlyoutItem>
 </Shell>

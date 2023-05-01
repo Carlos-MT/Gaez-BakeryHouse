@@ -1,4 +1,4 @@
-﻿using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.Models;
 using Gaez.BakeryHouse.Services;
 using Gaez.BakeryHouse.Views;
 using Newtonsoft.Json;
@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Input;
+using System.Xml.Linq;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Gaez.BakeryHouse.ViewModels
@@ -17,10 +19,10 @@ namespace Gaez.BakeryHouse.ViewModels
     public class CategoryProductViewModel : BaseViewModel
     {
         #region ATTRIBUTES
-        private string categoryJson;
-        private CategoryModel category;
-        private readonly ProductService productService;
-        private ObservableCollection<ProductModel> products;
+        string categoryJson;
+        CategoryModel category;
+        ObservableCollection<ProductModel> products;
+        readonly ProductService productService;
         #endregion
         #region PROPERTIES
         public string CategoryJson
@@ -42,7 +44,6 @@ namespace Gaez.BakeryHouse.ViewModels
         #region CONSTRUCTOR
         public CategoryProductViewModel()
         {
-            Title = "Productos por categoría";
             productService = new ProductService();
             Products = new ObservableCollection<ProductModel>();
         }
@@ -58,18 +59,19 @@ namespace Gaez.BakeryHouse.ViewModels
 
                 Products.Clear();
                 Products = Convert<ProductModel>(await productService.GetProductsByCategory(Category.CategoryId));
+                Title = Category.CategoryName;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                IsContentViewVisible = false;
-                IsRefreshing = false;
+                CurrentState = LayoutState.Error;
             }
 
-            // Si todo sale bien
-            IsContentViewVisible = true; // Muestra el contenido de la pagina
+            if (CurrentState != LayoutState.Error)
+                CurrentState = LayoutState.Success;
+
+
             IsRefreshing = false;
         }
-
         private void GetCategoryJsonParameter()
         {
             var category = JsonConvert.DeserializeObject<CategoryModel>(CategoryJson);
@@ -78,9 +80,9 @@ namespace Gaez.BakeryHouse.ViewModels
         #endregion
         #region COMMANDS
         public ICommand OnRefreshCommand => new Command(async () => await LoadData());
-        public ICommand OnProductClickedCommand => new Command<ProductModel>(async (item) =>
+        public ICommand OnProductClickedCommand => new Command<ProductModel>(async (p) =>
         {
-            var model = JsonConvert.SerializeObject((ProductModel)item);
+            var model = JsonConvert.SerializeObject((ProductModel)p);
             var modelEncoded = HttpUtility.UrlEncode(model);
             await Shell.Current.GoToAsync($"{nameof(ProductDetailPage)}?{nameof(ProductDetailViewModel.ProductJson)}={modelEncoded}");
         });

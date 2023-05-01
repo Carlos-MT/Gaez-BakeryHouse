@@ -13,17 +13,17 @@ namespace Gaez.BakeryHouse.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryProductPage : ContentPage
     {
-        private CategoryProductViewModel categoryProductViewModel;
+        CategoryProductViewModel viewModel;
         public CategoryProductPage()
         {
             InitializeComponent();
-            BindingContext = categoryProductViewModel = new CategoryProductViewModel();
+            BindingContext = viewModel = new CategoryProductViewModel();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await categoryProductViewModel.LoadData();
+            await viewModel.LoadData();
         }
     }
 }

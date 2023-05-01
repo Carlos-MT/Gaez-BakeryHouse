@@ -1,41 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
-             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:specialViews="clr-namespace:Gaez.BakeryHouse.Views.SpecialViewsFolder"
              xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.ProductDetailPageFolder"
+             Title="{Binding Title}"
              x:Class="Gaez.BakeryHouse.Views.ProductDetailPage">
 
-    <ContentPage.BindingContext>
-        <vm:ProductDetailViewModel/>
-    </ContentPage.BindingContext>
-
-    <Shell.TitleView>
-        <Grid>
-            <controls:CustomLabel Text="{Binding Title}"
-                                  FontAttributes="None"
-                                  Style="{StaticResource labelGenericMediumStyle}"
-                                  VerticalOptions="CenterAndExpand"/>
-        </Grid>
-    </Shell.TitleView>
-
-    <RefreshView RefreshColor="{StaticResource primaryColor}"
-                 IsRefreshing="{Binding IsRefreshing}"
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 RefreshColor="{StaticResource primaryColor}"
                  Command="{Binding OnRefreshCommand}">
         <ScrollView HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
-            <Grid IsVisible="{Binding IsContentViewVisible}"
-                  RowSpacing="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <views:ProductImageView Grid.Row="0"/>
-                <views:ProductInfoView Grid.Row="1"/>
-                <views:LeaveCommentView Grid.Row="2"/>
-                <views:ProductCommentView Grid.Row="3"/>
+            <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
+                  xct:StateLayout.AnimateStateChanges="False">
+                <xct:StateLayout.StateViews>
+                    <xct:StateView StateKey="Loading">
+                        <!--Add View for loading here -->
+                    </xct:StateView>
+                    <xct:StateView StateKey="Error"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                        <!--Add View for error here -->
+                        <specialViews:ErrorView/>
+                    </xct:StateView>
+                    <xct:StateView StateKey="Success">
+                        <!--Add View for sucess here -->
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <!--<RowDefinition Height="Auto"/>-->
+                            </Grid.RowDefinitions>
+                            <views:ProductImageView Grid.Row="0"/>
+                            <views:ProductInfoView Grid.Row="1"/>
+                            <views:LeaveCommentView Grid.Row="2"/>
+                            <!--<views:ProductCommentView Grid.Row="3"/>-->
+                        </Grid>
+                    </xct:StateView>
+                </xct:StateLayout.StateViews>
             </Grid>
         </ScrollView>
     </RefreshView>

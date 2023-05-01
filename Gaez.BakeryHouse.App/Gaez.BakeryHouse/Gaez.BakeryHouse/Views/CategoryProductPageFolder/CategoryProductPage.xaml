@@ -1,43 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
-             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:specialViews="clr-namespace:Gaez.BakeryHouse.Views.SpecialViewsFolder"
              xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.CategoryProductPageFolder"
+             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             Title="{Binding Title}"
              x:Class="Gaez.BakeryHouse.Views.CategoryProductPage">
 
-    <Shell.TitleView>
-        <Grid>
-            <controls:CustomLabel Text="{Binding Title}"
-                                  FontAttributes="None"
-                                  Style="{StaticResource labelGenericMediumStyle}"
-                                  VerticalOptions="CenterAndExpand"/>
-        </Grid>
-    </Shell.TitleView>
 
-    <ContentPage.BindingContext>
-        <vm:CategoryProductViewModel/>
-    </ContentPage.BindingContext>
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="controls:CustomLabel" x:Key="lblIconStyle">
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontFamily" Value="typicons"/>
-                <Setter Property="FontSize" Value="Title"/>
-                <Setter Property="TextColor" Value="Black"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-
-    <Grid RowSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <views:HeaderView Grid.Row="0"/>
-        <views:CollectionProductView Grid.Row="1"/>
+    <Grid xct:StateLayout.AnimateStateChanges="False"
+          xct:StateLayout.CurrentState="{Binding CurrentState}">
+        <xct:StateLayout.StateViews>
+            <xct:StateView StateKey="Loading"
+                           VerticalOptions="CenterAndExpand">
+                <!--Add View for loading here -->
+                <ActivityIndicator IsRunning="True"
+                                    Color="{StaticResource primaryColor}"/>
+            </xct:StateView>
+            <xct:StateView StateKey="Error"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                <!--Add View for error here -->
+                <specialViews:ErrorView/>
+            </xct:StateView>
+            <xct:StateView StateKey="Success">
+                <!--Add View for sucess here -->
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <views:CategoryProductHeaderView Grid.Row="0"/>
+                    <views:CollectionProductView Grid.Row="1"/>
+                </Grid>
+            </xct:StateView>
+        </xct:StateLayout.StateViews>
     </Grid>
 </ContentPage>

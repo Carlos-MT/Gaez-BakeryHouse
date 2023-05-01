@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Gaez.BakeryHouse.Views
+namespace Gaez.BakeryHouse.Views.CategoryProductPageFolder
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MyShoppingCarPage : ContentPage
+    public partial class CategoryProductHeaderView : ContentView
     {
-        public MyShoppingCarPage()
+        public CategoryProductHeaderView()
         {
             InitializeComponent();
         }

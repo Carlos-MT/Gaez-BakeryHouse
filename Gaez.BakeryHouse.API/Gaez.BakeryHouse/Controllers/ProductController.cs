@@ -29,6 +29,17 @@ namespace Gaez.BakeryHouse.Controllers
             catch (Exception ex) { throw; }
         }
 
+        [HttpGet("GetAllProductsOnlyNameAndProductCode")]
+        public IEnumerable<ProductModel> GetAllProductsOnlyNameAndProductCode()
+        {
+            try
+            {
+                var response = productService.GetAllProductsOnlyNameAndProductCode();
+                return response;
+            }
+            catch (Exception ex) { throw; }
+        }
+
         [HttpGet("GetProductsFromLowerToHigherPrice")]
         public IEnumerable<ProductModel> GetProductsFromLowerToHigherPrice(int categoryId)
         {

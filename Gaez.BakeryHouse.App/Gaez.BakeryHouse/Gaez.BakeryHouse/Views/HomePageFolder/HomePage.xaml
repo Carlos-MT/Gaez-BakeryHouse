@@ -1,39 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.HomePageFolder"
-             xmlns:vm="clr-namespace:Gaez.BakeryHouse.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:handlers="clr-namespace:Gaez.BakeryHouse.Handlers"
+             xmlns:specialViews="clr-namespace:Gaez.BakeryHouse.Views.SpecialViewsFolder"
+             xmlns:sk="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
+             xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.HomePageFolder"
              x:Class="Gaez.BakeryHouse.Views.HomePage">
 
-    <ContentPage.BindingContext>
-        <vm:HomeViewModel/>
-    </ContentPage.BindingContext>
-
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary"/>
+    </ContentPage.ToolbarItems>
     <Shell.SearchHandler>
         <handlers:ProductSearchHandler ShowsResults="True"
-                                       ItemTemplate="{StaticResource productsTemplate}"/>
+                                       ItemTemplate="{StaticResource searchTemplate}"/>
     </Shell.SearchHandler>
 
-    <RefreshView Command="{Binding OnRefreshPageCommand}"
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
                  RefreshColor="{StaticResource primaryColor}"
-                 IsRefreshing="{Binding IsRefreshing}">
+                 Command="{Binding OnRefreshCommand}">
         <ScrollView HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
-            <Grid Grid.Row="0"
-                  Margin="10"
-                  RowSpacing="20"
-                  IsVisible="{Binding IsContentViewVisible}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <views:CourseView Grid.Row="0"/>
-                <views:OffertView Grid.Row="1"/>
-                <views:RecipeView Grid.Row="2"/>
+            <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
+                  xct:StateLayout.AnimateStateChanges="False">
+                <xct:StateLayout.StateViews>
+                    <xct:StateView StateKey="Loading">
+                        <!--Add View for loading here -->
+                    </xct:StateView>
+                    <xct:StateView StateKey="Error"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+                        <!--Add View for error here -->
+                        <specialViews:ErrorView/>
+                    </xct:StateView>
+                    <xct:StateView StateKey="Success">
+                        <!--Add View for sucess here -->
+                        <Grid Grid.Row="0"
+                              Margin="10"
+                              RowSpacing="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <views:CourseView Grid.Row="0"/>
+                            <views:OffertView Grid.Row="1"/>
+                            <views:RecipeView Grid.Row="2"/>
+                        </Grid>
+                    </xct:StateView>
+                </xct:StateLayout.StateViews>
             </Grid>
         </ScrollView>
-    </RefreshView>
+    </RefreshView> 
 </ContentPage>

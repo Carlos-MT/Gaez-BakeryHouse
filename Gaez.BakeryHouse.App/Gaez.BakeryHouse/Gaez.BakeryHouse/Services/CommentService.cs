@@ -1,9 +1,9 @@
-﻿using Gaez.BakeryHouse.API.Models;
-using Gaez.BakeryHouse.Interfaces;
+﻿using Gaez.BakeryHouse.Interfaces;
+using Gaez.BakeryHouse.Models;
 using Refit;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,8 +31,8 @@ namespace Gaez.BakeryHouse.Services
                 return response;
             }
             catch (Exception ex)
-            { 
-                throw; 
+            {
+                throw;
             }
         }
         #endregion

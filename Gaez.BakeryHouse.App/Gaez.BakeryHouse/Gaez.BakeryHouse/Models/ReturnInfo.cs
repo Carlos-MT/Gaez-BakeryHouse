@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gaez.BakeryHouse.API.Models
+namespace Gaez.BakeryHouse.Models
 {
     public enum ResultCode
     {

@@ -1,16 +1,17 @@
-﻿using Gaez.BakeryHouse.API.Models;
-using Gaez.BakeryHouse.Interfaces;
+﻿using Gaez.BakeryHouse.interfaces;
+using Gaez.BakeryHouse.Models;
 using Refit;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Gaez.BakeryHouse.Services
 {
     public class ProductService : BaseService
     {
-        #region METHODS
         public async Task<IEnumerable<ProductModel>> GetAllProducts()
         {
             try
@@ -19,28 +20,12 @@ namespace Gaez.BakeryHouse.Services
                 var response = await apiResponse.GetAllProducts();
                 return response;
             }
-            catch (Exception ex) { throw; }
-        }
-        public async Task<IEnumerable<ProductModel>> GetProductsFromLowerToHigherPrice(int categoryId)
-        {
-            try
+            catch (Exception ex) 
             {
-                var apiResponse = RestService.For<IProductService>(httpClient);
-                var response = await apiResponse.GetProductsFromLowerToHigherPrice(categoryId);
-                return response;
+                throw;
             }
-            catch (Exception ex) { throw; }
         }
-        public async Task<IEnumerable<ProductModel>> GetProductsFromHigherToLowerPrice(int categoryId)
-        {
-            try
-            {
-                var apiResponse = RestService.For<IProductService>(httpClient);
-                var response = await apiResponse.GetProductsFromHigherToLowerPrice(categoryId);
-                return response;
-            }
-            catch (Exception ex) { throw; }
-        }
+
         public async Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId)
         {
             try
@@ -49,8 +34,10 @@ namespace Gaez.BakeryHouse.Services
                 var response = await apiResponse.GetProductsByCategory(categoryId);
                 return response;
             }
-            catch(Exception e) { throw; }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
-        #endregion
     }
 }

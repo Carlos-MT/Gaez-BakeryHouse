@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gaez.BakeryHouse.Views.SpecialViewsFolder.ErrorView">
+    <StackLayout Spacing="10">
+        <Label Text="¡Uy! Algo salío mal..."
+               TextColor="Black"
+               FontSize="Medium"/>
+        <Button Style="{StaticResource btnStyle}"
+                Text="Reintentar"
+                BackgroundColor="{StaticResource primaryColor}"
+                Command="{Binding OnRefreshCommand}"/>
+    </StackLayout>
+</ContentView>

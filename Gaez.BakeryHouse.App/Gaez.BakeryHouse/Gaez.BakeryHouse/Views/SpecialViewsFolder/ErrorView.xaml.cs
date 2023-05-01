@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Gaez.BakeryHouse.Views
+namespace Gaez.BakeryHouse.Views.SpecialViewsFolder
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomFlyoutHeaderPage : ContentView
+    public partial class ErrorView : ContentView
     {
-        public CustomFlyoutHeaderPage()
+        public ErrorView()
         {
             InitializeComponent();
         }

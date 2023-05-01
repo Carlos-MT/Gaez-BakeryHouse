@@ -4,25 +4,19 @@
              xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
              xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
              x:Class="Gaez.BakeryHouse.Views.ProductDetailPageFolder.ProductInfoView">
-
+    
     <ContentView.Resources>
         <ResourceDictionary>
             <Style TargetType="Frame" x:Key="frBtnStyle">
-                <Setter Property="BackgroundColor" Value="{StaticResource superLightGrayColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource lightGrayColor}"/>
                 <Setter Property="HeightRequest" Value="60"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="HasShadow" Value="False"/>
                 <Setter Property="Padding" Value="0"/>
             </Style>
-            <Style TargetType="controls:CustomLabel" x:Key="lblIconStyle">
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontFamily" Value="typicons"/>
-                <Setter Property="FontSize" Value="Title"/>
-                <Setter Property="TextColor" Value="Black"/>
-            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    
+
     <Grid Margin="10,20,10,0"
           RowSpacing="20">
         <Grid.RowDefinitions>
@@ -37,26 +31,26 @@
         <StackLayout Grid.Row="0" 
                      Spacing="0">
             <controls:CustomLabel Text="{Binding Product.ProductName}"
-                                  Style="{StaticResource labelGenericMediumStyle}"/>
+                                  Style="{StaticResource lblMediumStyle}"/>
             <controls:CustomLabel Text="por Gaez Bakery House"
                                   TextColor="{StaticResource grayColor}"
                                   FontAttributes="Bold"
-                                  Style="{StaticResource labelGenericMicroStyle}"/>
+                                  Style="{StaticResource lblMicroStyle}"/>
         </StackLayout>
         <controls:CustomLabel Grid.Row="1"
-                              Style="{StaticResource labelGenericStyle}"
+                              Style="{StaticResource lblNormalStyle}"
                               Text="{Binding Product.Application}"/>
         <controls:CustomLabel Grid.Row="2" 
                               Text="Stock disponible"
                               TextColor="Green"
-                              Style="{StaticResource labelGenericMediumStyle}"/>
+                              Style="{StaticResource lblMediumStyle}"/>
         <Frame Grid.Row="3" 
                Style="{StaticResource frBtnStyle}">
             <StackLayout Spacing="15"
                          Orientation="Horizontal"
                          Margin="10">
                 <controls:CustomLabel VerticalOptions="CenterAndExpand"
-                                      Style="{StaticResource labelGenericStyle}">
+                                      Style="{StaticResource lblNormalStyle}">
                     <controls:CustomLabel.FormattedText>
                         <FormattedString>
                             <Span Text="Cantidad: "/>
@@ -67,7 +61,7 @@
                 <controls:CustomLabel VerticalOptions="CenterAndExpand"
                                       FontAttributes="Bold"
                                       TextColor="{StaticResource grayColor}"
-                                      Style="{StaticResource labelGenericStyle}">
+                                      Style="{StaticResource lblNormalStyle}">
                     <controls:CustomLabel.FormattedText>
                         <FormattedString>
                             <Span Text="("/>
@@ -103,7 +97,7 @@
                 <controls:CustomLabel Style="{StaticResource lblIconStyle}"
                                       VerticalOptions="Center"
                                       Text="{Static fonts:IconFont.HeartOutline}"/>
-                <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                <controls:CustomLabel Style="{StaticResource lblNormalStyle}"
                                       VerticalOptions="Center"
                                       Text="Agregar a favoritos"/>
             </StackLayout>
@@ -111,13 +105,13 @@
                 <controls:CustomLabel Style="{StaticResource lblIconStyle}"
                                       VerticalOptions="Center"
                                       Text="{Static fonts:IconFont.ExportOutline}"/>
-                <controls:CustomLabel Style="{StaticResource labelGenericStyle}"
+                <controls:CustomLabel Style="{StaticResource lblNormalStyle}"
                                       VerticalOptions="Center"
                                       Text="Compartir"/>
             </StackLayout>
         </StackLayout>
         <BoxView Grid.Row="6"
                  Margin="-10,0"
-                 Style="{StaticResource boxLineStyle}"/>
+                 Style="{StaticResource boxStyle}"/>
     </Grid>
 </ContentView>

@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace Gaez.BakeryHouse.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HelpPage : ContentPage
-    {
-        public HelpPage()
-        {
-            InitializeComponent();
-        }
-    }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class HelpPage : ContentPage
+	{
+		public HelpPage ()
+		{
+			InitializeComponent ();
+		}
+	}
 }

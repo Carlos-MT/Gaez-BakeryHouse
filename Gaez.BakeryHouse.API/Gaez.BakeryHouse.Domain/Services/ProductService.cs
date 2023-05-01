@@ -49,6 +49,24 @@ namespace Gaez.BakeryHouse.Domain.Services
             }
             catch (Exception ex) { throw; }
         }
+
+        public IEnumerable<ProductModel> GetAllProductsOnlyNameAndProductCode()
+        {
+            try
+            {
+                var query = from t1 in productsRepo.GetAll()
+                            orderby t1.ProductName ascending
+                            select new ProductModel()
+                            {
+                                ProductCode = t1.ProductCode,
+                                ProductName = t1.ProductName
+                            };
+
+                return query;
+            }
+            catch (Exception ex) { throw; }
+        }
+           
         public IEnumerable<ProductModel> GetProductsFromLowerToHigherPrice(int categoryId)
         {
             try

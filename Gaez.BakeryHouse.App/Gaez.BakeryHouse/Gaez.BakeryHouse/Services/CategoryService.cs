@@ -1,5 +1,6 @@
-﻿using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.interfaces;
 using Gaez.BakeryHouse.Interfaces;
+using Gaez.BakeryHouse.Models;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,10 @@ namespace Gaez.BakeryHouse.Services
                 var response = await apiResponse.GetAllCategories();
                 return response;
             }
-            catch (Exception ex) { throw; }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Gaez.BakeryHouse.API.Models;
-using Gaez.BakeryHouse.Data;
+﻿using Gaez.BakeryHouse.Data;
+using Gaez.BakeryHouse.Models;
 using Gaez.BakeryHouse.ViewModels;
 using Gaez.BakeryHouse.Views;
 using Newtonsoft.Json;
@@ -14,17 +14,24 @@ namespace Gaez.BakeryHouse.Handlers
 {
     public class ProductSearchHandler : SearchHandler
     {
-        private List<ProductModel> searchResults;
+        IList<ProductModel> searchResults;
 
         protected override void OnQueryChanged(string oldValue, string newValue)
         {
             base.OnQueryChanged(oldValue, newValue);
 
             if (string.IsNullOrWhiteSpace(newValue))
+            {
                 ItemsSource = null;
+            }
             else
             {
-                searchResults = ProductData.Products.Where(p => p.ProductName.ToLower().Contains(newValue.ToLower())).ToList();
+                searchResults = ProductData.Products
+                    .Where(p => p.ProductName
+                    .ToLower()
+                    .Contains(newValue.ToLower()))
+                    .ToList();
+
                 ItemsSource = searchResults;
             }
         }

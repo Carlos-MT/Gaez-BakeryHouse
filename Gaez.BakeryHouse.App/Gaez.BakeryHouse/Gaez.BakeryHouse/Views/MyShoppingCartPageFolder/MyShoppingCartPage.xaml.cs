@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Gaez.BakeryHouse.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AccountPage : ContentPage
+	public partial class MyShoppingCartPage : ContentPage
 	{
-		public AccountPage ()
+		public MyShoppingCartPage ()
 		{
 			InitializeComponent ();
 		}

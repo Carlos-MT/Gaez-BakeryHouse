@@ -1,4 +1,4 @@
-﻿using Gaez.BakeryHouse.API.Models;
+﻿using Gaez.BakeryHouse.Models;
 using Gaez.BakeryHouse.Services;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Gaez.BakeryHouse.Data
     public static class ProductData
     {
         public static IList<ProductModel> Products { get; private set; }
-        private static readonly ProductService productService;
+        static readonly ProductService productService;
 
         static ProductData()
         {

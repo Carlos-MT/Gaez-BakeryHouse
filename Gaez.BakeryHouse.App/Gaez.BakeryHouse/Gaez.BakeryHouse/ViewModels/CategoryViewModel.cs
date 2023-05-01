@@ -1,5 +1,5 @@
-﻿using Gaez.BakeryHouse.API.Models;
-using Gaez.BakeryHouse.Data;
+﻿using Gaez.BakeryHouse.Data;
+using Gaez.BakeryHouse.Models;
 using Gaez.BakeryHouse.Services;
 using Gaez.BakeryHouse.Views;
 using Newtonsoft.Json;
@@ -10,29 +10,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace Gaez.BakeryHouse.ViewModels
 {
     public class CategoryViewModel : BaseViewModel
     {
-        #region ATRIBUTES
-        private ObservableCollection<CategoryModel> categories;
-        private readonly CategoryService categoryService;
-        #endregion
-        #region PROPERTIES
-        public ObservableCollection<CategoryModel> Categories
+        readonly CategoryService categoryService;
+        IList<CategoryModel> categories;
+        public IList<CategoryModel> Categories
         {
             get { return categories; }
             set { categories = value; OnPropertyChanged(); }
         }
-        #endregion
+
         #region CONSTRUCTOR
         public CategoryViewModel()
         {
             Title = "Categorías";
-            Categories = new ObservableCollection<CategoryModel>();
             categoryService = new CategoryService();
+            categories = new ObservableCollection<CategoryModel>();
         }
         #endregion
         #region METHODS
@@ -46,17 +44,17 @@ namespace Gaez.BakeryHouse.ViewModels
             }
             catch (Exception ex)
             {
-                IsContentViewVisible = false;
-                IsRefreshing = false;
+                CurrentState = LayoutState.Error;
             }
 
-            // Si todo sale bien
-            IsContentViewVisible = true; // Muestra el contenido de la pagina
+            if (CurrentState != LayoutState.Error)
+                CurrentState = LayoutState.Success;
+
             IsRefreshing = false;
         }
         #endregion
         #region COMMANDS
-        public ICommand OnRefreshPageCommand => new Command(async () => await LoadData());
+        public ICommand OnRefreshCommand => new Command(async () => await LoadData());
         public ICommand OnCategoryClickedCommand => new Command<CategoryModel>(async (p) => 
         {
             var model = JsonConvert.SerializeObject(p);
