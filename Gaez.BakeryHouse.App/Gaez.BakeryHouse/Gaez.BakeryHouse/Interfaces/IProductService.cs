@@ -9,5 +9,8 @@ namespace Gaez.BakeryHouse.interfaces
     {
         [Get("/Product/GetAllProducts")]
         Task<IEnumerable<ProductModel>> GetAllProducts();
+
+        [Get("/Product/GetProductsByCategory")]
+        Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId);
     }
 }

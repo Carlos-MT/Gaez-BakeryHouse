@@ -6,7 +6,7 @@ namespace Gaez.BakeryHouse.Models
 {
     public class CategoryModel
     {
-        public int CategroyId { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
 }

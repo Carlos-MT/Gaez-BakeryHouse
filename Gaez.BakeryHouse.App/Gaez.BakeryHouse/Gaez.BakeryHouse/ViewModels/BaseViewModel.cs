@@ -59,7 +59,6 @@ namespace Gaez.BakeryHouse.ViewModels
             CurrentState = LayoutState.Loading;
             Text = string.Empty;
         }
-
         public ObservableCollection<T> Convert<T>(IEnumerable<T> original)
         {
             return new ObservableCollection<T>(original);

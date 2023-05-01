@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:specialViews="clr-namespace:Gaez.BakeryHouse.Views.SpecialViewsFolder"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.CategoryProductPageFolder"
+             x:Class="Gaez.BakeryHouse.Views.CategoryProductPageFolder.CollectionProductView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="frmStyle">
+                <Setter Property="WidthRequest" Value="150"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource lightGrayColor}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid>
+        <CollectionView ItemsSource="{Binding Products}"
+                        x:Name="cv">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowSpacing="0"
+                          ColumnSpacing="0"
+                          xct:TouchEffect.NativeAnimation="True"
+                          xct:TouchEffect.Command="{Binding Path=BindingContext.OnProductClickedCommand, Source={x:Reference cv}}"
+                          xct:TouchEffect.CommandParameter="{Binding .}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="180"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Row="0"
+                               CornerRadius="10"
+                               Margin="10"
+                               HasShadow="False"
+                               BackgroundColor="{StaticResource lightGrayColor}"
+                               Grid.Column="0"/>
+                        <StackLayout Grid.Column="1"
+                                     Margin="0,10,10,10">
+                            <controls:CustomLabel Text="{Binding ProductName}"
+                                                  FontAttributes="Bold"
+                                                  Style="{StaticResource lblNormalStyle}"/>
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="2"
+                                         VerticalOptions="EndAndExpand">
+                                <Label Text="{Static fonts:IconFont.Star}"
+                                       TextColor="{StaticResource starColor}"
+                                       Style="{StaticResource lblIconStyle}"/>
+                                <Label VerticalOptions="Center"
+                                       Style="{StaticResource lblSmallStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Valuation, StringFormat='{0:F1}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Style="{StaticResource lblMediumStyle}"
+                                       HorizontalOptions="EndAndExpand"
+                                       TextColor="{StaticResource primaryColor}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="$ "/>
+                                            <Span Text="{Binding RegularPrice}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <BoxView Grid.Row="1"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 Style="{StaticResource boxStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentView>

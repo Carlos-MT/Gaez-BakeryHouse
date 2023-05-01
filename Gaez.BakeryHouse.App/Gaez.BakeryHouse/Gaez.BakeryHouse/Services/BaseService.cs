@@ -19,7 +19,7 @@ namespace Gaez.BakeryHouse.Services
 
             httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri("https://a69b-187-254-99-245.ngrok-free.app/")
+                BaseAddress = new Uri("https://53ae-187-254-100-211.ngrok-free.app/")
             };
         }
     }

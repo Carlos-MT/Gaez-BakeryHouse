@@ -15,52 +15,53 @@
                 <Setter Property="Padding" Value="0"/>
             </Style>
         </ResourceDictionary>
-    </ContentPage.Resources> 
+    </ContentPage.Resources>
 
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 RefreshColor="{StaticResource primaryColor}"
-                 Command="{Binding OnRefreshCommand}">
-        <ScrollView HorizontalScrollBarVisibility="Never"
+
+    <ScrollView HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
-            <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
                   xct:StateLayout.AnimateStateChanges="False">
-                <xct:StateLayout.StateViews>
-                    <xct:StateView StateKey="Loading">
-                        <!--Add View for loading here -->
-                    </xct:StateView>
-                    <xct:StateView StateKey="Error"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center">
-                        <!--Add View for error here -->
-                        <specialViews:ErrorView/>
-                    </xct:StateView>
-                    <xct:StateView StateKey="Success">
-                        <!--Add View for sucess here -->
-                        <StackLayout BindableLayout.ItemsSource="{Binding Categories}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame Style="{StaticResource frmStyle}"
-                                           xct:TouchEffect.NativeAnimation="True">
-                                        <StackLayout Orientation="Horizontal"
-                                                     Margin="10,0">
-                                            <Label Text="{Binding CategoryName}"
-                                                   VerticalOptions="Center"
-                                                   FontAttributes="None"
-                                                   Style="{StaticResource lblMediumStyle}"/>
-                                            <Label Text="{Static fonts:IconFont.ChevronRight}"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="EndAndExpand"
-                                                   Style="{StaticResource lblIconStyle}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
-                    </xct:StateView>
-                </xct:StateLayout.StateViews>
-            </Grid>
-        </ScrollView>
-    </RefreshView>
-
-   
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading"
+                               VerticalOptions="CenterAndExpand">
+                    <!--Add View for loading here -->
+                    <ActivityIndicator Color="{StaticResource primaryColor}"
+                                       IsRunning="True"/>
+                </xct:StateView>
+                <xct:StateView StateKey="Error"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+                    <!--Add View for error here -->
+                    <specialViews:ErrorView/>
+                </xct:StateView>
+                <xct:StateView StateKey="Success">
+                    <!--Add View for sucess here -->
+                    <StackLayout BindableLayout.ItemsSource="{Binding Categories}"
+                                 x:Name="stack">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Style="{StaticResource frmStyle}"
+                                       xct:TouchEffect.NativeAnimation="True"
+                                       xct:TouchEffect.Command="{Binding Path=BindingContext.OnCategoryClickedCommand, Source={x:Reference stack}}"
+                                       xct:TouchEffect.CommandParameter="{Binding .}">
+                                    <StackLayout Orientation="Horizontal"
+                                                 Margin="10,0">
+                                        <Label Text="{Binding CategoryName}"
+                                               VerticalOptions="Center"
+                                               FontAttributes="None"
+                                               Style="{StaticResource lblMediumStyle}"/>
+                                        <Label Text="{Static fonts:IconFont.ChevronRight}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="EndAndExpand"
+                                               Style="{StaticResource lblIconStyle}"/>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
+        </Grid>
+    </ScrollView>
 </ContentPage>
