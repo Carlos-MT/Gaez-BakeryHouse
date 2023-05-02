@@ -32,38 +32,46 @@
                           xct:TouchEffect.Command="{Binding Path=BindingContext.OnProductClickedCommand, Source={x:Reference cv}}"
                           xct:TouchEffect.CommandParameter="{Binding .}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="180"/>
+                            <RowDefinition Height="100"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="1.1*"/>
                         </Grid.ColumnDefinitions>
                         <Frame Grid.Row="0"
+                               Padding="3"
                                CornerRadius="10"
                                Margin="10"
                                HasShadow="False"
                                BackgroundColor="{StaticResource lightGrayColor}"
-                               Grid.Column="0"/>
+                               Grid.Column="0">
+                            <Label Style="{StaticResource lblIconStyle}"
+                                   HorizontalOptions="EndAndExpand"
+                                   Text="{Static fonts:IconFont.HeartOutline}"/>
+                        </Frame>
                         <StackLayout Grid.Column="1"
+                                     Spacing="0"
+                                     VerticalOptions="Center"
                                      Margin="0,10,10,10">
                             <controls:CustomLabel Text="{Binding ProductName}"
                                                   FontAttributes="Bold"
                                                   Style="{StaticResource lblNormalStyle}"/>
-                            <StackLayout Orientation="Horizontal"
-                                         Spacing="2"
-                                         VerticalOptions="EndAndExpand">
-                                <Label Text="{Static fonts:IconFont.Star}"
-                                       TextColor="{StaticResource starColor}"
-                                       Style="{StaticResource lblIconStyle}"/>
-                                <Label VerticalOptions="Center"
-                                       Style="{StaticResource lblSmallStyle}">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding Valuation, StringFormat='{0:F1}'}"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="2">
+                                    <Label Text="{Static fonts:IconFont.Star}"
+                                           TextColor="{StaticResource starColor}"
+                                           Style="{StaticResource lblIconStyle}"/>
+                                    <Label VerticalOptions="Center"
+                                           Style="{StaticResource lblNormalStyle}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Valuation, StringFormat='{0:F1}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
                                 <Label Style="{StaticResource lblMediumStyle}"
                                        HorizontalOptions="EndAndExpand"
                                        TextColor="{StaticResource primaryColor}">

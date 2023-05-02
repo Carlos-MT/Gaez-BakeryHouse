@@ -7,40 +7,40 @@
              Title="{Binding Title}"
              x:Class="Gaez.BakeryHouse.Views.ProductDetailPage">
 
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 RefreshColor="{StaticResource primaryColor}"
-                 Command="{Binding OnRefreshCommand}">
-        <ScrollView HorizontalScrollBarVisibility="Never"
+
+    <ScrollView HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
-            <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
+        <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
                   xct:StateLayout.AnimateStateChanges="False">
-                <xct:StateLayout.StateViews>
-                    <xct:StateView StateKey="Loading">
-                        <!--Add View for loading here -->
-                    </xct:StateView>
-                    <xct:StateView StateKey="Error"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center">
-                        <!--Add View for error here -->
-                        <specialViews:ErrorView/>
-                    </xct:StateView>
-                    <xct:StateView StateKey="Success">
-                        <!--Add View for sucess here -->
-                        <Grid RowSpacing="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <!--<RowDefinition Height="Auto"/>-->
-                            </Grid.RowDefinitions>
-                            <views:ProductImageView Grid.Row="0"/>
-                            <views:ProductInfoView Grid.Row="1"/>
-                            <views:LeaveCommentView Grid.Row="2"/>
-                            <!--<views:ProductCommentView Grid.Row="3"/>-->
-                        </Grid>
-                    </xct:StateView>
-                </xct:StateLayout.StateViews>
-            </Grid>
-        </ScrollView>
-    </RefreshView>
+            <xct:StateLayout.StateViews>
+                <xct:StateView StateKey="Loading"
+                               VerticalOptions="CenterAndExpand">
+                    <!--Add View for loading here -->
+                    <ActivityIndicator Color="{StaticResource primaryColor}"
+                                       IsRunning="True"/>
+                </xct:StateView>
+                <xct:StateView StateKey="Error"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+                    <!--Add View for error here -->
+                    <specialViews:ErrorView/>
+                </xct:StateView>
+                <xct:StateView StateKey="Success">
+                    <!--Add View for sucess here -->
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <!--<RowDefinition Height="Auto"/>-->
+                        </Grid.RowDefinitions>
+                        <views:ProductImageView Grid.Row="0"/>
+                        <views:ProductInfoView Grid.Row="1"/>
+                        <views:LeaveCommentView Grid.Row="2"/>
+                        <!--<views:ProductCommentView Grid.Row="3"/>-->
+                    </Grid>
+                </xct:StateView>
+            </xct:StateLayout.StateViews>
+        </Grid>
+    </ScrollView>
 </ContentPage>

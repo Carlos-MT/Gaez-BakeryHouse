@@ -48,25 +48,7 @@ namespace Gaez.BakeryHouse.Domain.Services
                 return query;
             }
             catch (Exception ex) { throw; }
-        }
-
-        public IEnumerable<ProductModel> GetAllProductsOnlyNameAndProductCode()
-        {
-            try
-            {
-                var query = from t1 in productsRepo.GetAll()
-                            orderby t1.ProductName ascending
-                            select new ProductModel()
-                            {
-                                ProductCode = t1.ProductCode,
-                                ProductName = t1.ProductName
-                            };
-
-                return query;
-            }
-            catch (Exception ex) { throw; }
-        }
-           
+        }  
         public IEnumerable<ProductModel> GetProductsFromLowerToHigherPrice(int categoryId)
         {
             try
@@ -134,7 +116,8 @@ namespace Gaez.BakeryHouse.Domain.Services
                                 RegularPrice = t1.RegularPrice,
                                 Valuation = t1.Valuation,
                                 Application = t1.Application,
-                                Description = t1.Description
+                                Description = t1.Description,
+                                Stock = t1.Stock
                             };
 
                 return query;
