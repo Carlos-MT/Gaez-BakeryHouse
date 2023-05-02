@@ -123,7 +123,10 @@
         </Shell.ItemTemplate>
     </FlyoutItem>
     <FlyoutItem Title="Mi carrito">
-        <ShellContent ContentTemplate="{DataTemplate views:MyShoppingCartPage}"/>
+        <Tab>
+            <ShellContent Title="Carrito" ContentTemplate="{DataTemplate views:CarPage}"/>
+            <ShellContent Title="Guardados" ContentTemplate="{DataTemplate views:SaveProdouctPage}"/>
+        </Tab>
         <Shell.ItemTemplate>
             <DataTemplate>
                 <Grid Style="{StaticResource gridDataTemplateStyle}"
