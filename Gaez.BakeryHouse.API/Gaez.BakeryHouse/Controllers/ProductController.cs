@@ -1,5 +1,7 @@
-﻿using Gaez.BakeryHouse.Domain.Models;
+﻿using Gaez.BakeryHouse.Data.Entities;
+using Gaez.BakeryHouse.Domain.Models;
 using Gaez.BakeryHouse.Domain.Services;
+using Gaez.BakeryHouse.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gaez.BakeryHouse.Controllers
@@ -60,6 +62,50 @@ namespace Gaez.BakeryHouse.Controllers
                 return response;
             }
             catch (Exception ex) { throw; }
+        }
+
+        [HttpPost("PostLikeProduct")]
+        public ReturnInfo PostLikeProduct(int clientId, int productCode)
+        {
+            try
+            {
+                ReturnInfo returnInfo = new ReturnInfo();
+                returnInfo = productService.PostLikeProduct(clientId, productCode);
+                return returnInfo;
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet("GetAllFavoriteProducts")]
+        public IEnumerable<ProductModel> GetAllFavoriteProducts(int clientId)
+        {
+            try
+            {
+                var response = productService.GetAllFavoriteProducts(clientId);
+                return response;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpDelete("DeleteLikeProduct")]
+        public ReturnInfo DeleteLikeProduct(int clientId, int productCode)
+        {
+            try
+            {
+                ReturnInfo returnInfo = new ReturnInfo();
+                returnInfo = productService.DeleteLikeProduct(clientId, productCode);
+                return returnInfo;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
         #endregion
     }

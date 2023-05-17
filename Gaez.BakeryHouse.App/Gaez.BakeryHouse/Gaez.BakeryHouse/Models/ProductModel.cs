@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Gaez.BakeryHouse.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Gaez.BakeryHouse.Models
 {
-    public class ProductModel
+    public class ProductModel : BaseViewModel
     {
         public int ProductCode { get; set; }
         public string ProductName { get; set; }
@@ -15,5 +17,19 @@ namespace Gaez.BakeryHouse.Models
         public string Application { get; set; }
         public int Stock { get; set; }
         public byte[] ProductImage { get; set; }
+        public Color ColorHeart
+        {
+            get { return colorHeart; }
+            set { colorHeart = value; OnPropertyChanged(); }
+        }
+        private Color colorHeart;
+        public string Icon
+        {
+            get { return  icon; }
+            set {  icon = value; OnPropertyChanged(); }
+        }
+
+        private string icon;
+
     }
 }

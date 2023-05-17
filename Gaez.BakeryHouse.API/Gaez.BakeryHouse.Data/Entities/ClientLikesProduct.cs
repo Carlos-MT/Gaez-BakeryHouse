@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Gaez.BakeryHouse.Data.Entities
 {
-    public partial class ProductBelongsToCategory
+    public partial class ClientLikesProduct
     {
         public int ProductCode { get; set; }
-        public int CategoryId { get; set; }
+        public int ClientId { get; set; }
 
-        public virtual Category Category { get; set; } = null!;
+        public virtual Client Client { get; set; } = null!;
         public virtual Product ProductCodeNavigation { get; set; } = null!;
     }
 }

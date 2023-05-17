@@ -1,4 +1,5 @@
 ﻿using Gaez.BakeryHouse.interfaces;
+using Gaez.BakeryHouse.Interfaces;
 using Gaez.BakeryHouse.Models;
 using Refit;
 using System;
@@ -25,7 +26,6 @@ namespace Gaez.BakeryHouse.Services
                 throw;
             }
         }
-
         public async Task<IEnumerable<ProductModel>> GetProductsByCategory(int categoryId)
         {
             try
@@ -38,6 +38,39 @@ namespace Gaez.BakeryHouse.Services
             {
                 throw;
             }
+        }
+        public async Task<ReturnInfo> PostLikeProduct(int clientId, int productCode)
+        {
+            try
+            {
+                var apiResponse = RestService.For<IProductService>(httpClient);
+                var response = await apiResponse.PostLikeProduct(clientId, productCode);
+                return response;
+            }
+            catch (Exception ex) { throw; }
+        }
+        public async Task<IEnumerable<ProductModel>> GetAllFavoriteProducts(int clientId)
+        {
+            try
+            {
+                var apiResponse = RestService.For<IProductService>(httpClient);
+                var response = await apiResponse.GetAllFavoriteProducts(clientId);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public async Task<ReturnInfo> DeleteLikeProduct(int clientId, int productCode)
+        {
+            try
+            {
+                var apiResponse = RestService.For<IProductService>(httpClient);
+                var response = await apiResponse.DeleteLikeProduct(clientId, productCode);
+                return response;
+            }
+            catch (Exception ex) { throw; }
         }
     }
 }

@@ -24,5 +24,15 @@ namespace Gaez.BakeryHouse.Views
             base.OnAppearing();
 			await viewModel.LoadData();
         }
-    }
+
+		protected override async void OnDisappearing()
+		{
+			base.OnDisappearing();
+
+			if (viewModel.Product.ColorHeart == Color.Red)
+				await viewModel.PostToFavorites();
+			else
+				await viewModel.DeleteToFavorites();
+		}
+	}
 }

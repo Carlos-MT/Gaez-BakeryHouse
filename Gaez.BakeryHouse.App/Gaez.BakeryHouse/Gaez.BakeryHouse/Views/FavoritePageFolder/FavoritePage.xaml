@@ -1,12 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Title="{Binding Title}"
+             xmlns:specialViews="clr-namespace:Gaez.BakeryHouse.Views.SpecialViewsFolder"
+             xmlns:views="clr-namespace:Gaez.BakeryHouse.Views.FavoritePageFolder"
              x:Class="Gaez.BakeryHouse.Views.FavoritePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    
+    <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
+          xct:StateLayout.AnimateStateChanges="False">
+        <xct:StateLayout.StateViews>
+            <xct:StateView StateKey="Loading"
+                           VerticalOptions="CenterAndExpand">
+                <!--Add View for loading here -->
+                <ActivityIndicator Color="{StaticResource primaryColor}"
+                                       IsRunning="True"/>
+            </xct:StateView>
+            <xct:StateView StateKey="Error"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                <!--Add View for error here -->
+                <specialViews:ErrorView/>
+            </xct:StateView>
+            <xct:StateView StateKey="Success">
+                <!--Add View for sucess here -->
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <views:ProductCollectionView Grid.Row="0"/>
+                </Grid>
+            </xct:StateView>
+        </xct:StateLayout.StateViews>
+    </Grid>
 </ContentPage>
