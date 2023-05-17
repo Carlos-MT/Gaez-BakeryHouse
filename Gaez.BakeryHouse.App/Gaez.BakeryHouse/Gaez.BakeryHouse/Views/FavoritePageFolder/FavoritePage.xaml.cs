@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gaez.BakeryHouse.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,17 @@ namespace Gaez.BakeryHouse.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FavoritePage : ContentPage
 	{
+		FavoriteViewModel viewModel;
 		public FavoritePage ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
+			BindingContext = viewModel = new FavoriteViewModel();
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+			await viewModel.LoadData();
+        }
+    }
 }

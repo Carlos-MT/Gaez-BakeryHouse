@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Plugin.Toasts;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace Gaez.BakeryHouse.ViewModels
     {
         #region ATRIBUTES
         readonly CommentService _commentService;
+        readonly ProductService _productService;
         string productJson;
         ObservableCollection<CommentModel> _onlyThreeComments;
         ObservableCollection<CommentModel> _comments;
@@ -70,6 +72,7 @@ namespace Gaez.BakeryHouse.ViewModels
             OnlyThreeComments = new ObservableCollection<CommentModel>();
             Comments = new ObservableCollection<CommentModel>();
             _commentService = new CommentService();
+            _productService = new ProductService();
         }
         #endregion
         #region METHODS
@@ -81,7 +84,9 @@ namespace Gaez.BakeryHouse.ViewModels
                 if (Product == null)
                     GetProductJsonParameter();
 
-                Comments.Clear();
+                await PaintOrNoPaintHeart();
+
+                //Comments.Clear();
                 //Comments = Convert<CommentModel>(await _commentService.GetAllCommentsForProduct(Product.ProductCode));
                 //LoadStars();
             }
@@ -115,11 +120,64 @@ namespace Gaez.BakeryHouse.ViewModels
             if (double.IsNaN(ProductRating))
                 ProductRating = 0.0;
         }
+        private async Task PaintOrNoPaintHeart()
+        {
+            var list = Convert<ProductModel>(await _productService.GetAllFavoriteProducts(3))
+                .Where(x => x.ProductCode == Product.ProductCode) ;
 
+            if(list.Count() > 0)
+            {
+                Product.ColorHeart = Color.Red;
+                Product.Icon = Fonts.IconFont.HeartFullOutline;
+            }
+            else
+            {
+                Product.ColorHeart = Color.Black;
+                Product.Icon = Fonts.IconFont.HeartOutline;
+            }
+        }
         private void GetProductJsonParameter()
         {
             var product = JsonConvert.DeserializeObject<ProductModel>(ProductJson);
             Product = product;
+        }
+        public async Task PostToFavorites()
+        {
+            ReturnInfo response;
+            CurrentState = LayoutState.Loading;
+            //base.OnAppering();
+            try
+            {
+                response = await _productService.PostLikeProduct(3, Product.ProductCode);
+            }
+            catch (Exception ex)
+            {
+                CurrentState = LayoutState.Error;
+            }
+
+            if (CurrentState != LayoutState.Error)
+                CurrentState = LayoutState.Success;
+
+            //IsRefreshing = false;
+        }
+        public async Task DeleteToFavorites()
+        {
+            ReturnInfo response;
+            CurrentState = LayoutState.Loading;
+            //base.OnAppering();
+            try
+            {
+                response = await _productService.DeleteLikeProduct(3, Product.ProductCode);
+            }
+            catch (Exception ex)
+            {
+                CurrentState = LayoutState.Error;
+            }
+
+            if (CurrentState != LayoutState.Error)
+                CurrentState = LayoutState.Success;
+
+            //IsRefreshing = false;
         }
         #endregion
         #region COMMANDS
@@ -127,7 +185,19 @@ namespace Gaez.BakeryHouse.ViewModels
         public ICommand OnCommetClikedCommand => new Command(async () =>
         {
         });
-
+        public ICommand OnFavoriteClickedCommand => new Command(() =>
+        {
+            if (Product.ColorHeart == Color.Red)
+            {
+                Product.ColorHeart = Color.Black;
+                Product.Icon = Fonts.IconFont.HeartOutline;
+            }
+            else
+            {
+                Product.ColorHeart = Color.Red;
+                Product.Icon = Fonts.IconFont.HeartFullOutline;
+            }
+        });
         public ICommand OnSelectStarCommand => new Command<int>((p) => StarCounter = p);
         #endregion
     }

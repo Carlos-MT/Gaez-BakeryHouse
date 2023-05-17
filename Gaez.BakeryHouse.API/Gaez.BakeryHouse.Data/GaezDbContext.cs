@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Gaez.BakeryHouse.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -19,7 +20,9 @@ namespace Gaez.BakeryHouse.Data
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Client> Clients { get; set; } = null!;
+        public virtual DbSet<ClientLikesProduct> ClientLikesProducts { get; set; } = null!;
         public virtual DbSet<ClientMakesComment> ClientMakesComments { get; set; } = null!;
+        public virtual DbSet<ClientSaveProduct> ClientSaveProducts { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<Offert> Offerts { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
@@ -47,7 +50,7 @@ namespace Gaez.BakeryHouse.Data
                 entity.ToTable("Category");
 
                 entity.Property(e => e.CategoryName)
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
 
@@ -59,41 +62,46 @@ namespace Gaez.BakeryHouse.Data
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FatherLastName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MotherLastName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Password)
                     .HasMaxLength(16)
                     .IsUnicode(false);
+            });
 
-                entity.HasMany(d => d.ProductCodes)
-                    .WithMany(p => p.Clients)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "ClientLikeProduct",
-                        l => l.HasOne<Product>().WithMany().HasForeignKey("ProductCode").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ClientLikeProduct_Product"),
-                        r => r.HasOne<Client>().WithMany().HasForeignKey("ClientId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ClientLikeProduct_Client"),
-                        j =>
-                        {
-                            j.HasKey("ClientId", "ProductCode");
+            modelBuilder.Entity<ClientLikesProduct>(entity =>
+            {
+                //entity.HasNoKey();
+                entity.HasKey(e => new { e.ClientId, e.ProductCode });
 
-                            j.ToTable("ClientLikeProduct");
-                        });
+                entity.ToTable("ClientLikesProduct");
 
-                entity.HasMany(d => d.ProductCodesNavigation)
-                    .WithMany(p => p.ClientsNavigation)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "ClientSaveProduct",
-                        l => l.HasOne<Product>().WithMany().HasForeignKey("ProductCode").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ClientSaveProduct_Product"),
-                        r => r.HasOne<Client>().WithMany().HasForeignKey("ClientId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ClientSaveProduct_Client"),
-                        j =>
-                        {
-                            j.HasKey("ClientId", "ProductCode");
+                entity.HasOne(d => d.Client)
+                    .WithMany()
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClientLikesProduct_Client");
 
-                            j.ToTable("ClientSaveProduct");
-                        });
+                entity.HasOne(d => d.ProductCodeNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.ProductCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClientLikesProduct_Product");
             });
 
             modelBuilder.Entity<ClientMakesComment>(entity =>
             {
-                entity.HasKey(e => e.CommentId)
-                    .HasName("PK_ClientMakesComment_1");
+                entity.HasKey(e => e.CommentId);
 
                 entity.ToTable("ClientMakesComment");
 
@@ -110,6 +118,26 @@ namespace Gaez.BakeryHouse.Data
                     .HasForeignKey<ClientMakesComment>(d => d.CommentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ClientMakesComment_Comment");
+            });
+
+            modelBuilder.Entity<ClientSaveProduct>(entity =>
+            {
+                //entity.HasNoKey();
+                entity.HasKey(e => new { e.ClientId, e.ProductCode });
+
+                entity.ToTable("ClientSaveProduct");
+
+                entity.HasOne(d => d.Client)
+                    .WithMany()
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClientSaveProduct_Client");
+
+                entity.HasOne(d => d.ProductCodeNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.ProductCode)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClientSaveProduct_Product");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -184,8 +212,7 @@ namespace Gaez.BakeryHouse.Data
 
             modelBuilder.Entity<ProductHasComment>(entity =>
             {
-                entity.HasKey(e => e.CommentId)
-                    .HasName("PK_ProductHasComment_1");
+                entity.HasKey(e => e.CommentId);
 
                 entity.ToTable("ProductHasComment");
 
@@ -206,8 +233,9 @@ namespace Gaez.BakeryHouse.Data
 
             modelBuilder.Entity<ProductOffert>(entity =>
             {
-                entity.HasKey(e => e.OffertId)
-                    .HasName("PK_ProductOfferts_1");
+                entity.HasKey(e => e.OffertId);
+
+                entity.ToTable("ProductOffert");
 
                 entity.Property(e => e.OffertId).ValueGeneratedNever();
 
@@ -215,13 +243,13 @@ namespace Gaez.BakeryHouse.Data
                     .WithOne(p => p.ProductOffert)
                     .HasForeignKey<ProductOffert>(d => d.OffertId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProductOfferts_Offert");
+                    .HasConstraintName("FK_ProductOffert_Offert");
 
                 entity.HasOne(d => d.ProductCodeNavigation)
                     .WithMany(p => p.ProductOfferts)
                     .HasForeignKey(d => d.ProductCode)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProductOfferts_Product");
+                    .HasConstraintName("FK_ProductOffert_Product");
             });
 
             modelBuilder.Entity<Provider>(entity =>
@@ -258,20 +286,7 @@ namespace Gaez.BakeryHouse.Data
             {
                 entity.ToTable("ShoppingCart");
 
-                entity.Property(e => e.Subtotal).HasColumnType("decimal(8, 2)");
-
-                entity.HasMany(d => d.ProductCodes)
-                    .WithMany(p => p.ShoppingCarts)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "ProductsAreInTheCart",
-                        l => l.HasOne<Product>().WithMany().HasForeignKey("ProductCode").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ProductsAreInTheCart_Product"),
-                        r => r.HasOne<ShoppingCart>().WithMany().HasForeignKey("ShoppingCartId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_ProductsAreInTheCart_ShoppingCart"),
-                        j =>
-                        {
-                            j.HasKey("ShoppingCartId", "ProductCode");
-
-                            j.ToTable("ProductsAreInTheCart");
-                        });
+                entity.Property(e => e.Subtotal).HasColumnType("decimal(10, 2)");
             });
 
             modelBuilder.Entity<ShoppingCartBelongsToClient>(entity =>
@@ -286,13 +301,13 @@ namespace Gaez.BakeryHouse.Data
                     .WithOne(p => p.ShoppingCartBelongsToClient)
                     .HasForeignKey<ShoppingCartBelongsToClient>(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ShoppingCartBelongsToClient_Client");
+                    .HasConstraintName("FK_ShoppingCartBelongsToClient_Client1");
 
                 entity.HasOne(d => d.ShoppingCart)
                     .WithMany(p => p.ShoppingCartBelongsToClients)
                     .HasForeignKey(d => d.ShoppingCartId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ShoppingCartBelongsToClient_ShoppingCart");
+                    .HasConstraintName("FK_ShoppingCartBelongsToClient_ShoppingCart1");
             });
 
             OnModelCreatingPartial(modelBuilder);

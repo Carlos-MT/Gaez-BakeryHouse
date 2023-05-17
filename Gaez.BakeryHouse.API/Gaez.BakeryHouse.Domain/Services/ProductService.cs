@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gaez.BakeryHouse.Utils;
 
 namespace Gaez.BakeryHouse.Domain.Services
 {
@@ -15,6 +16,7 @@ namespace Gaez.BakeryHouse.Domain.Services
         #region PROPERTIES
         private readonly GaezDbContext context;
         private readonly GenericRepository<Product> productsRepo;
+        private readonly GenericRepository<ClientLikesProduct> clientLikesProductRepo;
         private readonly GenericRepository<ProductBelongsToCategory> pbtCategoryRepo;
         #endregion
         #region CONSTRUCTOR
@@ -22,6 +24,7 @@ namespace Gaez.BakeryHouse.Domain.Services
         {
             this.context = context;
             productsRepo = new GenericRepository<Product>(context);
+            clientLikesProductRepo = new GenericRepository<ClientLikesProduct>();
             pbtCategoryRepo = new GenericRepository<ProductBelongsToCategory>(context);
         }
         #endregion
@@ -44,6 +47,7 @@ namespace Gaez.BakeryHouse.Domain.Services
                                 Stock = t1.Stock,
                                 Valuation = t1.Valuation
                             };
+
 
                 return query;
             }
@@ -123,6 +127,87 @@ namespace Gaez.BakeryHouse.Domain.Services
                 return query;
             }
             catch(Exception ex) { throw; }
+        }
+        public ReturnInfo PostLikeProduct(int clientId, int productCode)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            try
+            {
+                // 1. Se crean los objetos
+                var entity = new ClientLikesProduct
+                {
+                    ClientId = clientId,
+                    ProductCode = productCode
+                };
+
+                bool exist = clientLikesProductRepo.GetAll().Any(l => l.ClientId == clientId && l.ProductCode == productCode);
+
+                if(!exist)
+                {
+                    clientLikesProductRepo.Insert(entity);
+                    clientLikesProductRepo.Save();
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                returnInfo.Message = ex.Message;
+                returnInfo.Result = ResultCode.Error;
+                throw;
+            }
+
+            returnInfo.Message = "Operación realizada con exito";
+            return returnInfo;
+        }
+        public ReturnInfo DeleteLikeProduct(int clientId, int productCode)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            try
+            {
+                var x = clientLikesProductRepo.GetById(clientId, productCode);
+
+                if(x != null)
+                {
+                    clientLikesProductRepo.Delete(clientId, productCode);
+                    clientLikesProductRepo.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                returnInfo.Message = ex.Message;
+                returnInfo.Result = ResultCode.Error;
+                throw;
+            }
+
+            returnInfo.Message = "Operación realizada con exito";
+            return returnInfo;
+        }
+        public IEnumerable<ProductModel> GetAllFavoriteProducts(int clientId)
+        {
+            try
+            {
+                var query = from t1 in clientLikesProductRepo.GetAll()
+                            join t2 in productsRepo.GetAll()
+                            on t1.ProductCode equals t2.ProductCode
+                            where t1.ClientId == clientId
+                            select new ProductModel()
+                            {
+                                ProductCode = t1.ProductCode,
+                                ProductName = t2.ProductName,
+                                ProductImage = t2.ProductImage,
+                                Application = t2.Application,
+                                Description = t2.Description,
+                                ExpirityDate = t2.ExpirityDate,
+                                RegularPrice = t2.RegularPrice,
+                                Stock = t2.Stock,
+                                Valuation = t2.Valuation
+                            };
+
+
+                return query;
+            }
+            catch (Exception ex) { throw; }
         }
         #endregion
     }

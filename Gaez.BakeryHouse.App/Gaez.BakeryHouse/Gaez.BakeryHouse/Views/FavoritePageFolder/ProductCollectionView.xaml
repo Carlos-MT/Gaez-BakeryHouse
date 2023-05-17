@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
+             xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             x:Class="Gaez.BakeryHouse.Views.FavoritePageFolder.ProductCollectionView">
+
+    <ContentView.Resources>
+        <Style TargetType="Frame" x:Key="frmStyle">
+            <Setter Property="BorderColor" Value="{StaticResource lightGrayColor}"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+    </ContentView.Resources>
+    
+    <CollectionView ItemsSource="{Binding FavoriteProducts}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="165"/>
+                    </Grid.RowDefinitions>
+                    <Frame Style="{StaticResource frmStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Frame Padding="0"
+                                   CornerRadius="10"
+                                   BorderColor="{StaticResource lightGrayColor}"/>
+                            <StackLayout Grid.Column="1"
+                                         Spacing="0"
+                                         VerticalOptions="Center">
+                                <controls:CustomLabel Text="{Binding ProductName}"
+                                                      Style="{StaticResource lblNormalStyle}"
+                                                      FontAttributes="Bold"/>
+                                <controls:CustomLabel Style="{StaticResource lblNormalStyle}"
+                                                      FontAttributes="Bold"
+                                                      TextColor="{StaticResource primaryColor}">
+                                    <controls:CustomLabel.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="$ "/>
+                                            <Span Text="{Binding RegularPrice}"/>
+                                        </FormattedString>
+                                    </controls:CustomLabel.FormattedText>
+                                </controls:CustomLabel>
+                            </StackLayout>
+                            <StackLayout Grid.Row="1"
+                                        
+                                         Grid.ColumnSpan="2">
+                                <BoxView Style="{StaticResource boxStyle}"
+                                         Color="{StaticResource lightGrayColor}"
+                                         Margin="-10,0"/>
+
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="CenterAndExpand">
+                                    <Label Text="Eliminar"
+                                           VerticalOptions="CenterAndExpand"
+                                           FontAttributes="Bold"
+                                       Style="{StaticResource lblNormalStyle}"
+                                       TextColor="{StaticResource primaryColor}"/>
+                                    <Label Text="{Static fonts:IconFont.ArrowSortedDown}"
+                                           HorizontalOptions="EndAndExpand"
+                                           VerticalOptions="CenterAndExpand"
+                                       Style="{StaticResource lblIconStyle}"
+                                       TextColor="{StaticResource primaryColor}"/>
+                                </StackLayout>
+                               
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

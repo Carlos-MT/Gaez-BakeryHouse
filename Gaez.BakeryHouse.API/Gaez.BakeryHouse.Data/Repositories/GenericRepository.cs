@@ -30,6 +30,10 @@ namespace Gaez.BakeryHouse.Data.Repositories
         {
             return table.Find(id);
         }
+        public T GetById(int clientId, int productCode)
+        {
+            return table.Find(clientId, productCode);
+        }
         public void Insert(T obj)
         {
             table.Add(obj);
@@ -42,6 +46,11 @@ namespace Gaez.BakeryHouse.Data.Repositories
         public void Delete(object id)
         {
             T existing = table.Find(id);
+            table.Remove(existing);
+        }
+        public void Delete(int clientId, int productCode)
+        {
+            T existing = table.Find(clientId, productCode);
             table.Remove(existing);
         }
         public void Save()

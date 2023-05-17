@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Gaez.BakeryHouse.Controls"
              xmlns:fonts="clr-namespace:Gaez.BakeryHouse.Fonts"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="Gaez.BakeryHouse.Views.ProductDetailPageFolder.ProductInfoView">
     
     <ContentView.Resources>
@@ -93,10 +94,12 @@
                      HorizontalOptions="Center"
                      Spacing="20"
                      Orientation="Horizontal">
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal"
+                         xct:TouchEffect.Command="{Binding OnFavoriteClickedCommand}">
                 <controls:CustomLabel Style="{StaticResource lblIconStyle}"
                                       VerticalOptions="Center"
-                                      Text="{Static fonts:IconFont.HeartOutline}"/>
+                                      TextColor="{Binding Product.ColorHeart}"
+                                      Text="{Binding Product.Icon}"/>
                 <controls:CustomLabel Style="{StaticResource lblNormalStyle}"
                                       VerticalOptions="Center"
                                       Text="Agregar a favoritos"/>

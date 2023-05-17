@@ -9,7 +9,7 @@
 
 
     <ScrollView HorizontalScrollBarVisibility="Never"
-                    VerticalScrollBarVisibility="Never">
+                VerticalScrollBarVisibility="Never">
         <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
                   xct:StateLayout.AnimateStateChanges="False">
             <xct:StateLayout.StateViews>

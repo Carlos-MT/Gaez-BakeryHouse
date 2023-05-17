@@ -8,7 +8,6 @@ namespace Gaez.BakeryHouse.Data.Entities
         public ShoppingCart()
         {
             ShoppingCartBelongsToClients = new HashSet<ShoppingCartBelongsToClient>();
-            ProductCodes = new HashSet<Product>();
         }
 
         public int ShoppingCartId { get; set; }
@@ -16,7 +15,5 @@ namespace Gaez.BakeryHouse.Data.Entities
         public decimal Subtotal { get; set; }
 
         public virtual ICollection<ShoppingCartBelongsToClient> ShoppingCartBelongsToClients { get; set; }
-
-        public virtual ICollection<Product> ProductCodes { get; set; }
     }
 }
